@@ -8,3 +8,5 @@ D:\School\Telerik\C#\Code\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFiftee
 D:\School\Telerik\C#\Code\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\IgrataPetnaiset.csprojResolveAssemblyReference.cache
 D:\School\Telerik\C#\Code\17. TeamWork (Game-Fifteen-4)\bin\Debug\GameFifteen.exe
 D:\School\Telerik\C#\Code\17. TeamWork (Game-Fifteen-4)\bin\Debug\GameFifteen.pdb
+C:\Users\Pavel\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.exe
+C:\Users\Pavel\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.pdb
