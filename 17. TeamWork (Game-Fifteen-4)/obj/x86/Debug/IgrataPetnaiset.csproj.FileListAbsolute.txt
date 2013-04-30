@@ -12,3 +12,5 @@ C:\Users\Pavel\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\
 C:\Users\Pavel\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.pdb
 C:\Users\Nikimoto\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.exe
 C:\Users\Nikimoto\Documents\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.pdb
+G:\Telerik\Academy\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.exe
+G:\Telerik\Academy\GitHub\Team-Scandium\17. TeamWork (Game-Fifteen-4)\obj\x86\Debug\GameFifteen.pdb
