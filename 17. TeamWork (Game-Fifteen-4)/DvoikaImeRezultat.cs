@@ -1,43 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-namespace GameFifteen
+﻿namespace GameFifteen
 {
     struct DvoikaImeRezultat
     {
@@ -47,65 +8,35 @@ namespace GameFifteen
         public DvoikaImeRezultat(string name, int score)
         {
             this.name = name;
-
-
-            this.score = score;
-        
+            this.score = score;        
         }
 
-        public string Name
-        
-        {
-        
-            get
-            
-            {
-            
+        public string Name        
+        {        
+            get            
+            {            
                 return name;
             }
-
             
-            set
-            
-            {
-            
+            set            
+            {            
                 name = value;
             }
-
         }
 
-
-
-        
-        public int Score
-        
-        
+        public int Score 
         {
-        
-            
-            
-            
-            
             get
-            {
-            
+            {            
                 return score;
             }
 
-            
-            set
-            
+            set            
             {
-            
                 score = value;
             }
-
-
         }
-
     }
-
-
 }
 
 
