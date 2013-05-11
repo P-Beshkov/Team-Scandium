@@ -24,14 +24,14 @@ namespace Game_Fifteen
 
         private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
 
+        private static readonly Random random = new Random();
+
         // 
         private static int emptyCellRow;
 
         private static int emptyCellColumn;
 
-        private static string[,] matrix;
-
-        private static Random random = new Random();
+        private static string[,] matrix;        
 
         private static int turn;
 
