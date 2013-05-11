@@ -6,6 +6,14 @@ namespace Game_Fifteen
 {
     class Engine
     {
+        public enum Command
+        {
+            MoveCel,
+            Top,
+            Exit,
+            Illegal,
+            Restart
+        }
         // Const 
         private const string EmptyCellValue = " ";
 
