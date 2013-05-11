@@ -63,7 +63,56 @@ namespace Game_Fifteen
             emptyCellColumn = MatrixSizeColumns - 1;
             matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
         }
+        #region Pavel Methods
+        private static bool TryMakeMove(int cellNumber)
+        {
+            int direction = GetDirectionFromInputCell(cellNumber);
+            if (direction == -1)
+            {
+                return false;
+            }
+            MoveCell(direction);
+            return true;
+        }
+        private static int GetDirectionFromInputCell(int cellNumber)
+        {
+            int direction = -1;
 
+            for (int dir = 0; dir < DirectionRow.Length; dir++)
+            {
+                bool isDirValid = CheckIfCellIsValid(dir);
+                if (isDirValid)
+                {
+                    int nextCellRow = emptyCellRow + DirectionRow[dir];
+                    int nextCellColumn = emptyCellColumn + DirectionColumn[dir];
+
+                    if (matrix[nextCellRow, nextCellColumn] == cellNumber.ToString())
+                    {
+                        direction = dir;
+                        break;
+                    }
+                }
+            }
+
+            return direction;
+        }
+        private static bool IsCellValid(int cellNumber)
+        {
+            int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+            if (cellNumber <= 0 || cellNumber >= matrixSize)
+            {
+                return false;
+            }
+            return true;
+        }
+        private static string ReadUserInput()
+        {
+            PrintingOnConsole.PrintMessage("Enter a number to move: ");
+            string consoleInputLine = Console.ReadLine();
+            return consoleInputLine;
+        }
+        #endregion
+        
         public static void GameStart()
         {
             while (true)
@@ -76,15 +125,74 @@ namespace Game_Fifteen
                 while (true)
                 {
                     PrintingOnConsole.PrintNextMoveMessage();
-                    string consoleInputLine = Console.ReadLine();
-                    int cellNumber;
+                    string userInput = ReadUserInput();
+                    int cellNumber = 0;
+                    Command userAction;
+                    if (int.TryParse(userInput, out cellNumber))
+                    {
+                        userAction = Command.MoveCel;
+                    }
+                    else if (userInput == "restart")
+                    {
+                        userAction = Command.Restart;
+                    }
+                    else if (userInput == "top")
+                    {
+                        userAction = Command.Top;
+                    }
+                    else if (userInput == "exit")
+                    {
+                        userAction = Command.Exit;
+                    }
+                    else
+                    {
+                        userAction = Command.Illegal;
+                    }
+                    switch (userAction)
+                    {
+                        case Command.MoveCel:
+                            if (IsCellValid(cellNumber) == false)
+                            {
+                                PrintingOnConsole.PrintMessage("That cell does not exist in the matrix.");
+                            }
+                            if (TryMakeMove(cellNumber))
+                            {
+                                PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+                            }
+                            else
+                            {
+                                PrintingOnConsole.PrintMessage("Illegal move!");
+                            }
+                            if (CheckIfEmptyCellIsInPosition())
+                            {
+                                PerformEndingOperations();
+                                break;
+                            }
+                            break;
+                        case Command.Top:
+                            PrintingOnConsole.PrintTopScores();
+                            break;
+                        case Command.Exit:
+                            PrintingOnConsole.PrintMessage("Good bye!\n");
+                            break;
+                        case Command.Illegal:
+                            PrintingOnConsole.PrintMessage("Illegal command!\n");
+                            break;
+                        case Command.Restart:
+                        //break;
+                        default:
+                            break;
+                    }
+
+
+                    string consoleInputLine = Console.ReadLine();                    
                     if (int.TryParse(consoleInputLine, out cellNumber))
                     {
                         //Input is a cell number.
                         NextMove(cellNumber);
                         if (CheckIfEmptyCellIsInPosition())
                         {
-                            GameEnd();
+                            PerformEndingOperations();
                             break;
                         }
                     }
@@ -112,7 +220,7 @@ namespace Game_Fifteen
             }
         }
 
-        public static void GameEnd()
+        public static void PerformEndingOperations()
         {
             string moves = turn == 1 ? "1 move" : string.Format("{0} moves", turn);
             PrintingOnConsole.PrintCongratulation(moves);

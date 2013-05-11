@@ -93,5 +93,9 @@ namespace Game_Fifteen
         {
             Console.WriteLine("You couldn't get in the top {0} scoreboard.", topScoresAmount);
         }
+        public static void PrintMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }
