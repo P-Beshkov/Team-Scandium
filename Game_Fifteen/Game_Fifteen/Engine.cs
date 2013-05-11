@@ -128,7 +128,7 @@ namespace Game_Fifteen
             for (int i = 0; i < shuffles; i++)
             {
                 int direction = random.Next(DirectionRow.Length);
-                if (CheckIfCellIsInMatrix(direction))
+                if (CheckIfCellIsValid(direction))
                 {
                     MoveCell(direction);
                 }
@@ -139,7 +139,7 @@ namespace Game_Fifteen
             }
         }
 
-        private static bool CheckIfCellIsInMatrix(int direction)
+        private static bool CheckIfCellIsValid(int direction)
         {
 
             int nextCellRow = emptyCellRow + DirectionRow[direction];
@@ -223,7 +223,7 @@ namespace Game_Fifteen
 
             for (int dir = 0; dir < DirectionRow.Length; dir++)
             {
-                bool isDirValid = CheckIfCellIsInMatrix(dir);
+                bool isDirValid = CheckIfCellIsValid(dir);
 
                 if (isDirValid)
                 {
