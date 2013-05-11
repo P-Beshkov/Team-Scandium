@@ -74,7 +74,7 @@ namespace Game_Fifteen
                     {
                         //Input is a cell number.
                         NextMove(cellNumber);
-                        if (CheckIfEmptyCellIsInMatrix())
+                        if (CheckIfEmptyCellIsInPosition())
                         {
                             GameEnd();
                             break;
@@ -133,7 +133,7 @@ namespace Game_Fifteen
                     MoveCell(direction);
                 }
             }
-            if (CheckIfEmptyCellIsInMatrix())
+            if (CheckIfEmptyCellIsInPosition())
             {
                 ShuffleMatrix();
             }
@@ -155,7 +155,7 @@ namespace Game_Fifteen
             return isCellValid;
         }
 
-        private static bool CheckIfEmptyCellIsInMatrix()
+        private static bool CheckIfEmptyCellIsInPosition()
         {
             bool isEmptyCellInPlace =
                 emptyCellRow == MatrixSizeRows - 1 &&
