@@ -1,13 +1,20 @@
-﻿namespace GameFifteen
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Game_Fifteen
 {
-    struct DvoikaImeRezultat
+    class Player
     {
         private string name;
         private int score;
 
-        public DvoikaImeRezultat(string name, int score)
+        public Player(string name, int score)
         {
             this.name = name;
+
             this.score = score;        
         }
 
@@ -16,29 +23,23 @@
             get            
             {            
                 return name;
-            }
-            
+            }            
             set            
             {            
                 name = value;
             }
         }
-
-        public int Score 
+        
+        public int Score        
         {
             get
-            {            
+            {
                 return score;
             }
-
-            set            
+            set
             {
                 score = value;
             }
         }
     }
 }
-
-
-
-
