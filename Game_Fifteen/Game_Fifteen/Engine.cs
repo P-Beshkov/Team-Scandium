@@ -65,7 +65,6 @@ namespace Game_Fifteen
             matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
         }
 
-        #region Pavel Methods
         
         private static bool TryMakeMove(int cellNumber)
         {
@@ -118,7 +117,6 @@ namespace Game_Fifteen
             return consoleInputLine;
         }
         
-        #endregion
         
         public static void GameStart()
         {
@@ -159,23 +157,7 @@ namespace Game_Fifteen
                     switch (userAction)
                     {
                         case Command.MoveCel:
-                            if (IsCellValid(cellNumber) == false)
-                            {
-                                PrintingOnConsole.PrintMessage("That cell does not exist in the matrix.");
-                            }
-                            if (TryMakeMove(cellNumber))
-                            {
-                                PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
-                            }
-                            else
-                            {
-                                PrintingOnConsole.PrintMessage("Illegal move!");
-                            }
-                            if (CheckIfEmptyCellIsInPosition())
-                            {
-                                PerformEndingOperations();
-                                break;
-                            }
+                            MoveCellByPlayer(cellNumber);
                             break;
                         case Command.Top:
                             PrintingOnConsole.PrintTopScores();
@@ -194,39 +176,27 @@ namespace Game_Fifteen
                     {
                         break;
                     }
-                    
-                    //string consoleInputLine = Console.ReadLine();
-                    //if (int.TryParse(consoleInputLine, out cellNumber))
-                    //{
-                    //    //Input is a cell number.
-                    //    NextMove(cellNumber);
-                    //    if (CheckIfEmptyCellIsInPosition())
-                    //    {
-                    //        PerformEndingOperations();
-                    //        break;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    //Input is a command.
-                    //    if (consoleInputLine == "restart")
-                    //    {
-                    //        break;
-                    //    }
-                    //    switch (consoleInputLine)
-                    //    {
-                    //        case "top":
-                    //            PrintingOnConsole.PrintTopScores();
-                    //            break;
-                    //        case "exit":
-                    //            PrintingOnConsole.PrintGoodbye();
-                    //            return;
-                    //        default:
-                    //            PrintingOnConsole.PrintIllegalCommandMessage();
-                    //            break;
-                    //    }
-                    //}
                 }
+            }
+        }
+  
+        private static void MoveCellByPlayer(int cellNumber)
+        {
+            if (IsCellValid(cellNumber) == false)
+            {
+                PrintingOnConsole.PrintMessage("That cell does not exist in the matrix.");
+            }
+            if (TryMakeMove(cellNumber))
+            {
+                PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+            }
+            else
+            {
+                PrintingOnConsole.PrintMessage("Illegal move!");
+            }
+            if (CheckIfLevelFinished())
+            {
+                PerformEndingOperations();               
             }
         }
         
@@ -259,7 +229,7 @@ namespace Game_Fifteen
                     MoveCell(direction);
                 }
             }
-            if (CheckIfEmptyCellIsInPosition())
+            if (CheckIfLevelFinished())
             {
                 ShuffleMatrix();
             }
@@ -280,11 +250,10 @@ namespace Game_Fifteen
             return isCellValid;
         }
         
-        private static bool CheckIfEmptyCellIsInPosition()
+        private static bool CheckIfLevelFinished()
         {
-            bool isEmptyCellInPlace =
-                                     emptyCellRow == MatrixSizeRows - 1 &&
-                                     emptyCellColumn == MatrixSizeColumns - 1;
+            bool isEmptyCellInPlace = emptyCellRow == MatrixSizeRows - 1 &&
+                                      emptyCellColumn == MatrixSizeColumns - 1;
             if (!isEmptyCellInPlace)
             {
                 return false;
@@ -318,50 +287,6 @@ namespace Game_Fifteen
             emptyCellRow = nextCellRow;
             emptyCellColumn = nextCellColumn;
             turn++;
-        }
-        
-        private static void NextMove(int cellNumber)
-        {
-            int matrixSize = MatrixSizeRows * MatrixSizeColumns;
-            if (cellNumber <= 0 || cellNumber >= matrixSize)
-            {
-                PrintingOnConsole.PrintCellDoesNotExistMessage();
-                return;
-            }
-            
-            int direction = CellNumberToDirection(cellNumber);
-            if (direction == -1)
-            {
-                PrintingOnConsole.PrintIllegalMoveMessage();
-                return;
-            }
-            
-            MoveCell(direction);
-            PrintingOnConsole.PrintMatrix(matrix, MatrixSizeColumns, MatrixSizeColumns);
-        }
-        
-        private static int CellNumberToDirection(int cellNumber)
-        {
-            int direction = -1;
-            
-            for (int dir = 0; dir < DirectionRow.Length; dir++)
-            {
-                bool isDirValid = CheckIfCellIsValid(dir);
-                
-                if (isDirValid)
-                {
-                    int nextCellRow = emptyCellRow + DirectionRow[dir];
-                    
-                    int nextCellColumn = emptyCellColumn + DirectionColumn[dir];
-                    
-                    if (matrix[nextCellRow, nextCellColumn] == cellNumber.ToString())
-                    {
-                        direction = dir;
-                        break;
-                    }
-                }
-            }
-            return direction;
         }
     }
 }
