@@ -21,7 +21,7 @@
         {
             string[] topScores = FileHandling.GetTopScoresFromFile();
 
-            string name = PrintingOnConsole.ReadPlayerName();
+            string name = ConsoleManger.ReadPlayerName();
 
             topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, turn);
             Array.Sort(topScores);

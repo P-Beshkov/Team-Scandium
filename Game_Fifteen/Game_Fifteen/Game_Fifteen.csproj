@@ -45,7 +45,7 @@
     <Compile Include="FileHandling.cs" />
     <Compile Include="GameField.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="PrintingOnConsole.cs" />
+    <Compile Include="ConsoleManger.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

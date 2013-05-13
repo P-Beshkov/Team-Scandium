@@ -121,15 +121,15 @@ class GameField
     {
         if (IsCellValid(cellNumber) == false)
         {
-            PrintingOnConsole.PrintMessage("That cell does not exist in the matrix.");
+            ConsoleManger.PrintMessage("That cell does not exist in the matrix.");
         }
         if (TryMakeMove(cellNumber))
         {
-            PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+            ConsoleManger.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
         }
         else
         {
-            PrintingOnConsole.PrintMessage("Illegal move!");
+            ConsoleManger.PrintMessage("Illegal move!");
         }
         if (CheckIfLevelFinished())
         {

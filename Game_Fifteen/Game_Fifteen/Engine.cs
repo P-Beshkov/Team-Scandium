@@ -112,7 +112,7 @@ namespace Game_Fifteen
         
         private static string ReadUserInput()
         {
-            PrintingOnConsole.PrintMessage("Enter a number to move: ");
+            ConsoleManger.PrintMessage("Enter a number to move: ");
             string consoleInputLine = Console.ReadLine();
             return consoleInputLine;
         }
@@ -125,11 +125,11 @@ namespace Game_Fifteen
                 InitializeMatrix();
                 ShuffleMatrix();
                 turn = 0;
-                PrintingOnConsole.PrintWelcomeMessage();
-                PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+                ConsoleManger.PrintWelcomeMessage();
+                ConsoleManger.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
                 while (true)
                 {
-                    PrintingOnConsole.PrintNextMoveMessage();
+                    ConsoleManger.PrintNextMoveMessage();
                     string userInput = ReadUserInput();
                     int cellNumber = 0;
                     bool needsRestart = false;
@@ -160,13 +160,13 @@ namespace Game_Fifteen
                             MoveCellByPlayer(cellNumber);
                             break;
                         case Command.Top:
-                            PrintingOnConsole.PrintTopScores();
+                            ConsoleManger.PrintTopScores();
                             break;
                         case Command.Exit:
-                            PrintingOnConsole.PrintMessage("Good bye!\n");
+                            ConsoleManger.PrintMessage("Good bye!\n");
                             return;
                         case Command.Illegal:
-                            PrintingOnConsole.PrintMessage("Illegal command!\n");
+                            ConsoleManger.PrintMessage("Illegal command!\n");
                             break;
                         case Command.Restart:
                             needsRestart = true;
@@ -184,15 +184,15 @@ namespace Game_Fifteen
         {
             if (IsCellValid(cellNumber) == false)
             {
-                PrintingOnConsole.PrintMessage("That cell does not exist in the matrix.");
+                ConsoleManger.PrintMessage("That cell does not exist in the matrix.");
             }
             if (TryMakeMove(cellNumber))
             {
-                PrintingOnConsole.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+                ConsoleManger.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
             }
             else
             {
-                PrintingOnConsole.PrintMessage("Illegal move!");
+                ConsoleManger.PrintMessage("Illegal move!");
             }
             if (CheckIfLevelFinished())
             {
@@ -203,14 +203,14 @@ namespace Game_Fifteen
         public static void PerformEndingOperations()
         {
             string moves = turn == 1 ? "1 move" : string.Format("{0} moves", turn);
-            PrintingOnConsole.PrintCongratulation(moves);
+            ConsoleManger.PrintCongratulation(moves);
             string[] topScores = FileHandling.GetTopScoresFromFile();
             if (topScores[TopScoresAmount - 1] != null)
             {
                 string lowestScore = Regex.Replace(topScores[TopScoresAmount - 1], TopScoresPersonPattern, @"$2");
                 if (int.Parse(lowestScore) < turn)
                 {
-                    PrintingOnConsole.PrintScore(TopScoresAmount);
+                    ConsoleManger.PrintScore(TopScoresAmount);
                     return;
                 }
             }
