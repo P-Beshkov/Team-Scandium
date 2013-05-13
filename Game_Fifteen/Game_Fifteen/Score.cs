@@ -20,14 +20,12 @@
         public void UpgradeTopScore(int turn)
         {
             string[] topScores = FileHandling.GetTopScoresFromFile();
-
             string name = ConsoleManger.ReadPlayerName();
 
             topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, turn);
             Array.Sort(topScores);
 
             this.UpgradeTopPlayers(topScores);
-
             this.sortedScores = this.TopPlayers.OrderBy(x => x.Score).ThenBy(x => x.Name);
 
             FileHandling.UpgradeTopScoreInFile(this.sortedScores);
@@ -53,6 +51,6 @@
                 int scoreInt = int.Parse(score);
                 this.TopPlayers[topScoresPairsIndex] = new Player(name, scoreInt);
             }
-        } 
+        }
     }
 }
