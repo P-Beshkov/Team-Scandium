@@ -15,6 +15,21 @@ class GameField
 
     private string[,] matrix;
 
+    #region Singleton Design Pattern
+    //private static readonly GameField instance = new GameField();
+
+    //public static GameField GetGameFieldInstance()
+    //{
+    //    return instance;
+    //}
+
+    //private  GameField()
+    //{
+    //    this.InitializeMatrix();
+    //    this.ShuffleMatrix();
+    //}
+    #endregion
+
     public GameField()
     {        
         this.InitializeMatrix();
