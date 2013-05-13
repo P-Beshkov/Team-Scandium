@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Game_Fifteen
 {
-    class Engine
+    public class Engine
     {
         public enum Command
         {
@@ -35,7 +35,7 @@ namespace Game_Fifteen
 
         private static readonly Random random = new Random();
 
-        // 
+        // fields
         private static int emptyCellRow;
 
         private static int emptyCellColumn;
@@ -239,11 +239,11 @@ namespace Game_Fifteen
         {
             int nextCellRow = emptyCellRow + DirectionRow[direction];
             
-            bool isRowValid = (nextCellRow >= 0 && nextCellRow < MatrixSizeRows);
+            bool isRowValid = nextCellRow >= 0 && nextCellRow < MatrixSizeRows;
             
             int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
             
-            bool isColumnValid = (nextCellColumn >= 0 && nextCellColumn < MatrixSizeColumns);
+            bool isColumnValid = nextCellColumn >= 0 && nextCellColumn < MatrixSizeColumns;
             
             bool isCellValid = isRowValid && isColumnValid;
             

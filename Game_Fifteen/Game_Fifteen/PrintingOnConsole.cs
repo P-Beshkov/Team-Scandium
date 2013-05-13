@@ -93,9 +93,22 @@ namespace Game_Fifteen
         {
             Console.WriteLine("You couldn't get in the top {0} scoreboard.", topScoresAmount);
         }
+
         public static void PrintMessage(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public static string ReadPlayerName()
+        {
+            Console.Write("Please enter your name for the top scoreboard: ");
+            string name = Console.ReadLine();
+            if (name == string.Empty)
+            {
+                name = "Anonymous";
+            }
+
+            return name;
         }
     }
 }

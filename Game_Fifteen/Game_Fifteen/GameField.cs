@@ -15,7 +15,7 @@ class GameField
 
     private string[,] matrix;
 
-    #region Singleton Design Pattern
+    #region Singleton Design Pattern => трябва да е за Engine-a !!! а не тук
     //private static readonly GameField instance = new GameField();
 
     //public static GameField GetGameFieldInstance()
