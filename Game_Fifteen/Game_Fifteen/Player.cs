@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Game_Fifteen
 {
     /// <summary>
-    /// 
+    /// name and score of each player
     /// </summary>
     class Player
     {
