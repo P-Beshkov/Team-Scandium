@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Game_Fifteen
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class Player
     {
         private string name;
