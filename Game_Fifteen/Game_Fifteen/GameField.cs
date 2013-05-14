@@ -78,7 +78,7 @@ class GameField
         int direction = GetDirectionFromInputCell(cellNumber);
         if (direction == -1)
         {
-            return false;
+            throw new ArgumentException("Direction cannot be negative!");
         }
         MoveCell(direction);
         return true;
@@ -112,7 +112,7 @@ class GameField
         int matrixSize = MatrixSizeRows * MatrixSizeColumns;
         if (cellNumber <= 0 || cellNumber >= matrixSize)
         {
-            return false;
+            throw new ArgumentOutOfRangeException("Cell number must be in range between 1 and matrix size!");
         }
         return true;
     }
@@ -160,7 +160,7 @@ class GameField
                                   emptyCellColumn == MatrixSizeColumns - 1;
         if (!isEmptyCellInPlace)
         {
-            return false;
+            throw new ArgumentException("The game has not finished!");
         }
 
         int cellValue = 1;
