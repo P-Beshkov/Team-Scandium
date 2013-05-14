@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game_Fifteen
 {
-    class ConsoleManger
+    class ConsoleManager
     {
         // Methods
         public static void PrintCellDoesNotExistMessage()
