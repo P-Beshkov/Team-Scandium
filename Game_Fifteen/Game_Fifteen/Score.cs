@@ -20,7 +20,7 @@
         public void UpgradeTopScore(int turn)
         {
             string[] topScores = FileHandling.GetTopScoresFromFile();
-            string name = ConsoleManger.ReadPlayerName();
+            string name = ConsoleManager.ReadPlayerName();
 
             topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, turn);
             Array.Sort(topScores);

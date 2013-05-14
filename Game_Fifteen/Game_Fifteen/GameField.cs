@@ -78,7 +78,7 @@ class GameField
         int direction = GetDirectionFromInputCell(cellNumber);
         if (direction == -1)
         {
-            throw new ArgumentException("Direction cannot be negative!");
+            ConsoleManager.PrintIllegalMoveMessage();
         }
         MoveCell(direction);
         return true;
@@ -112,7 +112,7 @@ class GameField
         int matrixSize = MatrixSizeRows * MatrixSizeColumns;
         if (cellNumber <= 0 || cellNumber >= matrixSize)
         {
-            throw new ArgumentOutOfRangeException("Cell number must be in range between 1 and matrix size!");
+            ConsoleManager.PrintCellDoesNotExistMessage();
         }
         return true;
     }
@@ -121,15 +121,15 @@ class GameField
     {
         if (IsCellValid(cellNumber) == false)
         {
-            ConsoleManger.PrintMessage("That cell does not exist in the matrix.");
+            ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
         }
         if (TryMakeMove(cellNumber))
         {
-            ConsoleManger.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+            ConsoleManager.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
         }
         else
         {
-            ConsoleManger.PrintMessage("Illegal move!");
+            ConsoleManager.PrintMessage("Illegal move!");
         }
         if (CheckIfLevelFinished())
         {
