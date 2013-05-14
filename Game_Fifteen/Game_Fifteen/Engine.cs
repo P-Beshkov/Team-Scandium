@@ -71,7 +71,7 @@ namespace Game_Fifteen
             int direction = GetDirectionFromInputCell(cellNumber);
             if (direction == -1)
             {
-                return false;
+                throw new ArgumentException("Direction must be positive!");
             }
             MoveCell(direction);
             return true;
@@ -105,7 +105,7 @@ namespace Game_Fifteen
             int matrixSize = MatrixSizeRows * MatrixSizeColumns;
             if (cellNumber <= 0 || cellNumber >= matrixSize)
             {
-                return false;
+                throw new ArgumentOutOfRangeException("Cell number must be in range between 1 and matrix size!");
             }
             return true;
         }
@@ -214,7 +214,9 @@ namespace Game_Fifteen
                     return;
                 }
             }
-            Score.UpgradeTopScore(turn);
+
+            Score score = new Score();
+            score.UpgradeTopScore(turn);
         }
         
         private static void ShuffleMatrix()
@@ -256,7 +258,7 @@ namespace Game_Fifteen
                                       emptyCellColumn == MatrixSizeColumns - 1;
             if (!isEmptyCellInPlace)
             {
-                return false;
+                throw new ArgumentException("The game has not finished!");
             }
             
             int cellValue = 1;
