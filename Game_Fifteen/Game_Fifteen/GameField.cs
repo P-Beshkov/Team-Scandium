@@ -1,10 +1,10 @@
 ﻿using Game_Fifteen;
 using System;
-class GameField
+using System.Text;
+
+internal class GameField
 {
     private const string EmptyCellValue = " ";
-    private const int MatrixSizeRows = 4;
-    private const int MatrixSizeColumns = 4;
 
     private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
     private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
@@ -15,7 +15,8 @@ class GameField
 
     private string[,] matrix;
 
-    #region Singleton Design Pattern => трябва да е за Engine-a !!! а не тук
+    #region Singleton Design Pattern
+
     //private static readonly GameField instance = new GameField();
 
     //public static GameField GetGameFieldInstance()
@@ -28,36 +29,54 @@ class GameField
     //    this.InitializeMatrix();
     //    this.ShuffleMatrix();
     //}
+
     #endregion
 
-    public GameField()
-    {        
-        this.InitializeMatrix();
+    public int FieldRows
+    {
+        get
+        {
+            return matrix.GetLength(0);
+        }
+    }
+
+    public int FieldColumns
+    {
+        get
+        {
+            return matrix.GetLength(1);
+        }
+    }
+
+    public GameField(int size = 0)
+    {
+        this.InitializeMatrix(size);
         this.ShuffleMatrix();
     }
-    private void InitializeMatrix()
+
+    private void InitializeMatrix(int size)
     {
-        matrix = new string[MatrixSizeRows, MatrixSizeColumns];
+        matrix = new string[size, size];
 
         int cellValue = 1;
 
-        for (int row = 0; row < MatrixSizeRows; row++)
+        for (int row = 0; row < FieldRows; row++)
         {
-            for (int column = 0; column < MatrixSizeColumns; column++)
+            for (int column = 0; column < FieldColumns; column++)
             {
                 matrix[row, column] = cellValue.ToString();
                 cellValue++;
             }
         }
 
-        emptyCellRow = MatrixSizeRows - 1;
-        emptyCellColumn = MatrixSizeColumns - 1;
+        emptyCellRow = FieldRows - 1;
+        emptyCellColumn = FieldColumns - 1;
         matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
     }
 
     private void ShuffleMatrix()
     {
-        int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        int matrixSize = FieldRows * FieldColumns;
         int shuffles = random.Next(matrixSize, matrixSize * 100);
         for (int i = 0; i < shuffles; i++)
         {
@@ -67,7 +86,7 @@ class GameField
                 MoveCell(direction);
             }
         }
-        if (CheckIfLevelFinished())
+        if (IsMazeOrdered())
         {
             ShuffleMatrix();
         }
@@ -78,10 +97,31 @@ class GameField
         int direction = GetDirectionFromInputCell(cellNumber);
         if (direction == -1)
         {
-            ConsoleManager.PrintIllegalMoveMessage();
+            return false;
         }
         MoveCell(direction);
         return true;
+    }
+
+    private void MoveCell(int direction)
+    {
+        int nextCellRow = emptyCellRow + DirectionRow[direction];
+        int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+        matrix[emptyCellRow, emptyCellColumn] = matrix[nextCellRow, nextCellColumn];
+        matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
+        emptyCellRow = nextCellRow;
+        emptyCellColumn = nextCellColumn;
+    }
+
+    private bool CheckIfCellIsValid(int direction)
+    {
+        int nextCellRow = emptyCellRow + DirectionRow[direction];
+        bool isRowValid = (nextCellRow >= 0 && nextCellRow < FieldRows);
+        int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+        bool isColumnValid = (nextCellColumn >= 0 && nextCellColumn < FieldColumns);
+        bool isCellValid = isRowValid && isColumnValid;
+
+        return isCellValid;
     }
 
     private int GetDirectionFromInputCell(int cellNumber)
@@ -109,55 +149,54 @@ class GameField
 
     private bool IsCellValid(int cellNumber)
     {
-        int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        int matrixSize = FieldRows * FieldColumns;
         if (cellNumber <= 0 || cellNumber >= matrixSize)
         {
-            ConsoleManager.PrintCellDoesNotExistMessage();
+            return false;
         }
         return true;
     }
 
-    private void MoveCellByPlayer(int cellNumber)
+    public void MoveCellByPlayer(int cellNumber)
     {
         if (IsCellValid(cellNumber) == false)
         {
-            ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
+            throw new ArgumentOutOfRangeException("That cell does not exist in the matrix.");
         }
-        if (TryMakeMove(cellNumber))
+        if (TryMakeMove(cellNumber) == false)
         {
-            ConsoleManager.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
-        }
-        else
-        {
-            ConsoleManager.PrintMessage("Illegal move!");
-        }
-        if (CheckIfLevelFinished())
-        {
-            PerformEndingOperations();
+            throw new ArgumentOutOfRangeException("Illegal move!");
         }
     }
 
-    
-
-    private bool CheckIfCellIsValid(int direction)
+    public override string ToString()
     {
-        int nextCellRow = emptyCellRow + DirectionRow[direction];
+        StringBuilder horizontalBorder = new StringBuilder("  ");
+        for (int i = 0; i < matrix.GetLength(1); i++)
+        {
+            horizontalBorder.Append("---");
+        }
+        horizontalBorder.Append("- \n");
 
-        bool isRowValid = (nextCellRow >= 0 && nextCellRow < MatrixSizeRows);
-
-        int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
-
-        bool isColumnValid = (nextCellColumn >= 0 && nextCellColumn < MatrixSizeColumns);
-
-        bool isCellValid = isRowValid && isColumnValid;
-
-        return isCellValid;
+        StringBuilder buffer = new StringBuilder();
+        buffer.Append(horizontalBorder);
+        for (int row = 0; row < matrix.GetLength(0); row++)
+        {
+            buffer.Append(" |");
+            for (int column = 0; column < matrix.GetLength(1); column++)
+            {
+                buffer.Append(String.Format("{0,3}", matrix[row, column]));
+            }
+            buffer.Append(" |\n");
+        }
+        buffer.Append(horizontalBorder);
+        return buffer.ToString();
     }
 
-    private bool CheckIfLevelFinished()
+    public bool IsMazeOrdered()
     {
-        bool isEmptyCellInPlace = emptyCellRow == MatrixSizeRows - 1 &&
-                                  emptyCellColumn == MatrixSizeColumns - 1;
+        bool isEmptyCellInPlace = emptyCellRow == FieldRows - 1 &&
+                                  emptyCellColumn == FieldColumns - 1;
         if (!isEmptyCellInPlace)
         {
             return false;
@@ -165,31 +204,19 @@ class GameField
 
         int cellValue = 1;
 
-        int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        int matrixSize = FieldRows * FieldColumns;
 
-        for (int row = 0; row < MatrixSizeRows; row++)
+        for (int row = 0; row < FieldRows; row++)
         {
-            for (int column = 0; column < MatrixSizeColumns && cellValue < matrixSize; column++)
+            for (int column = 0; column < FieldColumns && cellValue < matrixSize; column++)
             {
                 if (matrix[row, column] != cellValue.ToString())
                 {
                     return false;
                 }
-
                 cellValue++;
             }
         }
         return true;
-    }
-
-    private void MoveCell(int direction)
-    {
-        int nextCellRow = emptyCellRow + DirectionRow[direction];
-        int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
-        matrix[emptyCellRow, emptyCellColumn] = matrix[nextCellRow, nextCellColumn];
-        matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
-        emptyCellRow = nextCellRow;
-        emptyCellColumn = nextCellColumn;
-        turn++;
     }
 }
