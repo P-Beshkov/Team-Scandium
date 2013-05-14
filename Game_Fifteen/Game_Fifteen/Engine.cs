@@ -258,7 +258,7 @@ namespace Game_Fifteen
                                       emptyCellColumn == MatrixSizeColumns - 1;
             if (!isEmptyCellInPlace)
             {
-                throw new ArgumentException("The game has not finished!");
+                return false;
             }
             
             int cellValue = 1;
