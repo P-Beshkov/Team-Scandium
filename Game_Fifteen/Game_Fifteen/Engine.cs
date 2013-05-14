@@ -71,7 +71,7 @@ namespace Game_Fifteen
             int direction = GetDirectionFromInputCell(cellNumber);
             if (direction == -1)
             {
-                throw new ArgumentException("Direction must be positive!");
+                ConsoleManager.PrintIllegalMoveMessage();
             }
             MoveCell(direction);
             return true;
@@ -105,7 +105,7 @@ namespace Game_Fifteen
             int matrixSize = MatrixSizeRows * MatrixSizeColumns;
             if (cellNumber <= 0 || cellNumber >= matrixSize)
             {
-                throw new ArgumentOutOfRangeException("Cell number must be in range between 1 and matrix size!");
+                ConsoleManager.PrintCellDoesNotExistMessage();
             }
             return true;
         }
