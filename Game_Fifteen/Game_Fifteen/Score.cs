@@ -7,7 +7,7 @@
     public class Score
     {
         private const int TopPlayersCount = 5;
-        private const string TopScoresPersonPattern = @"^\d+\. (.+) --> (\d+) moves?$";
+        private const string ScorePattern = @"^\d+\. (.+) --> (\d+) moves?$";
 
         private IOrderedEnumerable<Player> sortedScores;
 
@@ -15,7 +15,7 @@
         {
         }
 
-        public Player[] TopPlayers { get; private set; }
+        private Player[] TopPlayers { get; set; }
 
         public void UpgradeTopScore(int turn)
         {
@@ -25,13 +25,13 @@
             topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, turn);
             Array.Sort(topScores);
 
-            this.UpgradeTopPlayers(topScores);
+            this.UpdateTopPlayers(topScores);
             this.sortedScores = this.TopPlayers.OrderBy(x => x.Score).ThenBy(x => x.Name);
 
             FileHandling.UpgradeTopScoreInFile(this.sortedScores);
         }
 
-        private void UpgradeTopPlayers(string[] topScores)
+        private void UpdateTopPlayers(string[] topScores)
         {
             int startIndex = 0;
             while (topScores[startIndex] == null)
@@ -46,8 +46,8 @@
             for (int topScoresPairsIndex = 0; topScoresPairsIndex < arraySize; topScoresPairsIndex++)
             {
                 int topScoresIndex = topScoresPairsIndex + startIndex;
-                string name = Regex.Replace(topScores[topScoresIndex], TopScoresPersonPattern, @"$1");
-                string score = Regex.Replace(topScores[topScoresIndex], TopScoresPersonPattern, @"$2");
+                string name = Regex.Replace(topScores[topScoresIndex], ScorePattern, @"$1");
+                string score = Regex.Replace(topScores[topScoresIndex], ScorePattern, @"$2");
                 int scoreInt = int.Parse(score);
                 this.TopPlayers[topScoresPairsIndex] = new Player(name, scoreInt);
             }
