@@ -9,15 +9,18 @@ namespace Game_Fifteen
     /// <summary>
     /// name and score of each player
     /// </summary>
-    class Player
+    public class Player
     {
         private string name;
         private int score;
 
         public Player(string name, int score)
         {
+            if (score < 0)
+            {
+                throw new ArgumentException("Playes score can not be negative!");
+            }
             this.name = name;
-
             this.score = score;        
         }
 
@@ -25,11 +28,11 @@ namespace Game_Fifteen
         {        
             get            
             {            
-                return name;
+                return this.name;
             }            
             set            
             {            
-                name = value;
+                this.name = value;
             }
         }
         
@@ -37,11 +40,11 @@ namespace Game_Fifteen
         {
             get
             {
-                return score;
+                return this.score;
             }
             set
             {
-                score = value;
+                this.score = value;
             }
         }
     }
