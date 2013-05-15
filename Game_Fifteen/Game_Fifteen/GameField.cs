@@ -17,7 +17,7 @@ public class GameField
     private static int emptyCellRow;
     private static int emptyCellColumn;
 
-    private int turn; // ne znam za kakwo e
+    private int turn;
 
     private string[,] matrix;
 
@@ -79,6 +79,7 @@ public class GameField
     {
         this.InitializeMatrix();
         this.ShuffleMatrix();
+        this.Turns = 0;
     }
 
     private void InitializeMatrix()
@@ -156,9 +157,7 @@ public class GameField
         matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
         emptyCellRow = nextCellRow;
         emptyCellColumn = nextCellColumn;
-        this.Turns++;
-        //int turn = this.Turns;
-        //turn++; //ne znam za kakvo e
+        this.Turns++;        
     }
 
     private bool CheckIfCellIsValid(int direction)

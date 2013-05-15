@@ -31,7 +31,7 @@ namespace Game_Fifteen
 
         //private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
 
-        private static readonly Random random = new Random();
+        //private static readonly Random random = new Random();
 
         // fields
         //private static int emptyCellRow;
@@ -114,8 +114,7 @@ namespace Game_Fifteen
             ConsoleManager.PrintMessage("Enter a number to move: ");
             string consoleInputLine = Console.ReadLine();
             return consoleInputLine;
-        }
-        
+        }        
         
         public static void GameStart(GameField field)
         {
@@ -123,8 +122,7 @@ namespace Game_Fifteen
             {
                 //InitializeMatrix();
                 //ShuffleMatrix();
-                //GameField field = new GameField();
-                field.Turns = 0;
+                //GameField field = new GameField();               
                 ConsoleManager.PrintWelcomeMessage();
                 ConsoleManager.PrintMatrix(field.GetMatrix, field.FieldRows, field.FieldColumns);
                 while (true)
