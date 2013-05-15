@@ -88,11 +88,11 @@ public class GameField
         matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
     }
 
-    private void ShuffleMatrix()
+    private void ShuffleMatrix() // testing
     {
         int matrixSize = FieldRows * FieldColumns;
         int shuffles = random.Next(matrixSize, matrixSize * 100);
-        for (int i = 0; i < shuffles; i++)
+        for (int i = 0; i < 1; i++)
         {
             int direction = random.Next(DirectionRow.Length);
             if (CheckIfCellIsValid(direction))
@@ -105,6 +105,24 @@ public class GameField
             ShuffleMatrix();
         }
     }
+
+    //private void ShuffleMatrix()
+    //{
+    //    int matrixSize = FieldRows * FieldColumns;
+    //    int shuffles = random.Next(matrixSize, matrixSize * 100);
+    //    for (int i = 0; i < shuffles; i++)
+    //    {
+    //        int direction = random.Next(DirectionRow.Length);
+    //        if (CheckIfCellIsValid(direction))
+    //        {
+    //            MoveCell(direction);
+    //        }
+    //    }
+    //    if (IsMazeOrdered())
+    //    {
+    //        ShuffleMatrix();
+    //    }
+    //}
 
     private bool TryMakeMove(int cellNumber)
     {
@@ -176,13 +194,19 @@ public class GameField
     {
         if (IsCellValid(cellNumber) == false)
         {
-            ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
+            //ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
+            ConsoleManager.PrintCellDoesNotExistMessage();
         }
         if (TryMakeMove(cellNumber) == false)
         {
-            ConsoleManager.PrintMessage("Illegal move!");
+            //ConsoleManager.PrintMessage("Illegal move!");
+            ConsoleManager.PrintIllegalCommandMessage();
         }       
         ConsoleManager.PrintMatrix(this.matrix, GAME_BOARD_SIZE, GAME_BOARD_SIZE);
+        if (IsMazeOrdered())
+        {
+            Engine.PerformEndingOperations();
+        }
 
     }
 
