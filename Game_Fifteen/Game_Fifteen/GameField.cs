@@ -17,7 +17,7 @@ public class GameField
     private static int emptyCellRow;
     private static int emptyCellColumn;
 
-    //private static int turn; // ne znam za kakwo e
+    private int turn; // ne znam za kakwo e
 
     private string[,] matrix;
 
@@ -59,6 +59,19 @@ public class GameField
         get 
         {
             return this.matrix;
+        }
+    }
+
+    public int Turns
+    {
+        get
+        {
+            return this.turn;
+        }
+
+        set
+        {
+            this.turn = value;
         }
     }
 
@@ -143,6 +156,8 @@ public class GameField
         matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
         emptyCellRow = nextCellRow;
         emptyCellColumn = nextCellColumn;
+        this.Turns++;
+        //int turn = this.Turns;
         //turn++; //ne znam za kakvo e
     }
 
@@ -203,11 +218,6 @@ public class GameField
             ConsoleManager.PrintIllegalCommandMessage();
         }       
         ConsoleManager.PrintMatrix(this.matrix, GAME_BOARD_SIZE, GAME_BOARD_SIZE);
-        if (IsMazeOrdered())
-        {
-            Engine.PerformEndingOperations();
-        }
-
     }
 
     public override string ToString()

@@ -38,7 +38,7 @@ namespace Game_Fifteen
 
         //private static int emptyCellColumn;       
 
-        private static int turn;
+       // private static int turn;
 
         // Methods
         //private static void InitializeMatrix()
@@ -124,7 +124,7 @@ namespace Game_Fifteen
                 //InitializeMatrix();
                 //ShuffleMatrix();
                 //GameField field = new GameField();
-                //turn = 0;
+                field.Turns = 0;
                 ConsoleManager.PrintWelcomeMessage();
                 ConsoleManager.PrintMatrix(field.GetMatrix, field.FieldRows, field.FieldColumns);
                 while (true)
@@ -158,6 +158,10 @@ namespace Game_Fifteen
                     {
                         case Command.MoveCel:
                             field.MoveCellByPlayer(cellNumber);
+                            if (field.IsMazeOrdered())
+                            {
+                                Engine.PerformEndingOperations(field);
+                            }
                             break;
                         case Command.Top:
                             ConsoleManager.PrintTopScores();
@@ -200,15 +204,15 @@ namespace Game_Fifteen
         //    }
         //}
         
-        public static void PerformEndingOperations()
+        public static void PerformEndingOperations(GameField field)
         {
-            string moves = turn == 1 ? "1 move" : string.Format("{0} moves", turn);
+            string moves = field.Turns == 1 ? "1 move" : string.Format("{0} moves", field.Turns);
             ConsoleManager.PrintCongratulation(moves);
             string[] topScores = FileHandling.GetTopScoresFromFile();
             if (topScores[TopScoresAmount - 1] != null)
             {
                 string lowestScore = Regex.Replace(topScores[TopScoresAmount - 1], TopScoresPersonPattern, @"$2");
-                if (int.Parse(lowestScore) < turn)
+                if (int.Parse(lowestScore) < field.Turns)
                 {
                     ConsoleManager.PrintScore(TopScoresAmount);
                     return;
@@ -216,7 +220,7 @@ namespace Game_Fifteen
             }
 
             Score score = new Score();
-            score.UpgradeTopScore(turn);
+            score.UpgradeTopScore(field.Turns);
         }
         
         //private static void ShuffleMatrix()
