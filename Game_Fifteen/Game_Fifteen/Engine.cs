@@ -20,9 +20,7 @@ namespace Game_Fifteen
 
         private const int MatrixSizeRows = 4;
 
-        private const int MatrixSizeColumns = 4;
-
-        private const string TopScoresFileName = "Top.txt";
+        private const int MatrixSizeColumns = 4;        
 
         private const string TopScoresPersonPattern = @"^\d+\. (.+) --> (\d+) moves?$";
 
@@ -73,7 +71,11 @@ namespace Game_Fifteen
             {
                 ConsoleManager.PrintIllegalMoveMessage();
             }
-            MoveCell(direction);
+            else
+            {
+                MoveCell(direction);
+            }
+            
             return true;
         }
         

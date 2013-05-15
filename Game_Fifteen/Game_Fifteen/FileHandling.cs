@@ -29,8 +29,7 @@ namespace Game_Fifteen
             }
             catch (FileNotFoundException)
             {
-                StreamWriter topWriter =
-                    new StreamWriter(TopScoresFileName);
+                StreamWriter topWriter = new StreamWriter(TopScoresFileName);
                 using (topWriter)
                 {
                     topWriter.Write("");
