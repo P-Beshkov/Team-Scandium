@@ -7,9 +7,10 @@ namespace Game_Fifteen
     {
         static void Main(string[] args)
         {
-            Engine.GameStart();
-
             GameField field = new GameField();
+            Engine.GameStart(field);
+
+            
 
         }
     }

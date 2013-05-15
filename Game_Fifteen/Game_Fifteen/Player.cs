@@ -30,8 +30,8 @@ namespace Game_Fifteen
             {            
                 return this.name;
             }            
-            set            
-            {            
+            private set            
+            {
                 this.name = value;
             }
         }

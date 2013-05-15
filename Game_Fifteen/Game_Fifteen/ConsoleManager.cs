@@ -9,7 +9,13 @@ namespace Game_Fifteen
 {
     class ConsoleManager
     {
+        //private const string CellDoesNotExistMessage = "That cell does not exist in the matrix.";
+        //private const string GoodbyeMessage = "Good bye!";
+        //private const string IllegalCommandMessage = "Illegal command!";
+        //private const string llegalMoveMessage = "Illegal move!";
+        //private const string NextMoveMessage = "Enter a number to move:!";
         // Methods
+
         public static void PrintCellDoesNotExistMessage()
         {
             Console.WriteLine("That cell does not exist in the matrix.");

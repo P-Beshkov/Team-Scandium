@@ -2,9 +2,13 @@
 using System;
 using System.Text;
 
-internal class GameField
+public class GameField
 {
     private const string EmptyCellValue = " ";
+
+    //private const int MatrixSizeRows = 4;
+    //private const int MatrixSizeColumns = 4;  
+    private const int GAME_BOARD_SIZE = 4;
 
     private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
     private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
@@ -12,6 +16,8 @@ internal class GameField
 
     private static int emptyCellRow;
     private static int emptyCellColumn;
+
+    //private static int turn; // ne znam za kakwo e
 
     private string[,] matrix;
 
@@ -24,7 +30,7 @@ internal class GameField
     //    return instance;
     //}
 
-    //private  GameField()
+    //private GameField()
     //{
     //    this.InitializeMatrix();
     //    this.ShuffleMatrix();
@@ -48,15 +54,23 @@ internal class GameField
         }
     }
 
-    public GameField(int size = 0)
+    public string[,] GetMatrix
     {
-        this.InitializeMatrix(size);
+        get 
+        {
+            return this.matrix;
+        }
+    }
+
+    public GameField()
+    {
+        this.InitializeMatrix();
         this.ShuffleMatrix();
     }
 
-    private void InitializeMatrix(int size)
+    private void InitializeMatrix()
     {
-        matrix = new string[size, size];
+        matrix = new string[GAME_BOARD_SIZE, GAME_BOARD_SIZE];
 
         int cellValue = 1;
 
@@ -111,6 +125,7 @@ internal class GameField
         matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
         emptyCellRow = nextCellRow;
         emptyCellColumn = nextCellColumn;
+        //turn++; //ne znam za kakvo e
     }
 
     private bool CheckIfCellIsValid(int direction)
@@ -118,7 +133,7 @@ internal class GameField
         int nextCellRow = emptyCellRow + DirectionRow[direction];
         bool isRowValid = (nextCellRow >= 0 && nextCellRow < FieldRows);
         int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
-        bool isColumnValid = (nextCellColumn >= 0 && nextCellColumn < FieldColumns);
+        bool isColumnValid = (nextCellColumn >= 0 && (nextCellColumn < FieldColumns));
         bool isCellValid = isRowValid && isColumnValid;
 
         return isCellValid;
@@ -161,12 +176,14 @@ internal class GameField
     {
         if (IsCellValid(cellNumber) == false)
         {
-            throw new ArgumentOutOfRangeException("That cell does not exist in the matrix.");
+            ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
         }
         if (TryMakeMove(cellNumber) == false)
         {
-            throw new ArgumentOutOfRangeException("Illegal move!");
-        }
+            ConsoleManager.PrintMessage("Illegal move!");
+        }       
+        ConsoleManager.PrintMatrix(this.matrix, GAME_BOARD_SIZE, GAME_BOARD_SIZE);
+
     }
 
     public override string ToString()

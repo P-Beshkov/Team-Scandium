@@ -16,101 +16,98 @@ namespace Game_Fifteen
         }
 
         // Const 
-        private const string EmptyCellValue = " ";
+        //private const string EmptyCellValue = " ";
 
-        private const int MatrixSizeRows = 4;
+        //private const int MatrixSizeRows = 4;
 
-        private const int MatrixSizeColumns = 4;        
+        //private const int MatrixSizeColumns = 4;        
 
         private const string TopScoresPersonPattern = @"^\d+\. (.+) --> (\d+) moves?$";
 
         private const int TopScoresAmount = 5;
 
         // ReadOnly
-        private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
+        //private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
 
-        private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
+        //private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
 
         private static readonly Random random = new Random();
 
         // fields
-        private static int emptyCellRow;
+        //private static int emptyCellRow;
 
-        private static int emptyCellColumn;
-
-        private static string[,] matrix;
+        //private static int emptyCellColumn;       
 
         private static int turn;
 
         // Methods
-        private static void InitializeMatrix()
-        {
-            matrix = new string[MatrixSizeRows, MatrixSizeColumns];
+        //private static void InitializeMatrix()
+        //{
+        //    matrix = new string[MatrixSizeRows, MatrixSizeColumns];
 
-            int cellValue = 1;
+        //    int cellValue = 1;
 
-            for (int row = 0; row < MatrixSizeRows; row++)
-            {
-                for (int column = 0; column < MatrixSizeColumns; column++)
-                {
-                    matrix[row, column] = cellValue.ToString();
-                    cellValue++;
-                }
-            }
+        //    for (int row = 0; row < MatrixSizeRows; row++)
+        //    {
+        //        for (int column = 0; column < MatrixSizeColumns; column++)
+        //        {
+        //            matrix[row, column] = cellValue.ToString();
+        //            cellValue++;
+        //        }
+        //    }
 
-            emptyCellRow = MatrixSizeRows - 1;
-            emptyCellColumn = MatrixSizeColumns - 1;
-            matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
-        }
-
+        //    emptyCellRow = MatrixSizeRows - 1;
+        //    emptyCellColumn = MatrixSizeColumns - 1;
+        //    matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
+        //}
         
-        private static bool TryMakeMove(int cellNumber)
-        {
-            int direction = GetDirectionFromInputCell(cellNumber);
-            if (direction == -1)
-            {
-                ConsoleManager.PrintIllegalMoveMessage();
-            }
-            else
-            {
-                MoveCell(direction);
-            }
+        //private static bool TryMakeMove(int cellNumber)
+        //{
+        //    int direction = GetDirectionFromInputCell(cellNumber);
+        //    if (direction == -1)
+        //    {
+        //        ConsoleManager.PrintIllegalMoveMessage();
+        //    }
+        //    else
+        //    {
+        //        MoveCell(direction);
+        //    }
             
-            return true;
-        }
+        //    return true;
+        //}
         
-        private static int GetDirectionFromInputCell(int cellNumber)
-        {
-            int direction = -1;
+        //private static int GetDirectionFromInputCell(int cellNumber)
+        //{
+        //    int direction = -1;
             
-            for (int dir = 0; dir < DirectionRow.Length; dir++)
-            {
-                bool isDirValid = CheckIfCellIsValid(dir);
-                if (isDirValid)
-                {
-                    int nextCellRow = emptyCellRow + DirectionRow[dir];
-                    int nextCellColumn = emptyCellColumn + DirectionColumn[dir];
+        //    for (int dir = 0; dir < DirectionRow.Length; dir++)
+        //    {
+        //        bool isDirValid = CheckIfCellIsValid(dir);
+        //        if (isDirValid)
+        //        {
+        //            int nextCellRow = emptyCellRow + DirectionRow[dir];
+        //            int nextCellColumn = emptyCellColumn + DirectionColumn[dir];
                     
-                    if (matrix[nextCellRow, nextCellColumn] == cellNumber.ToString())
-                    {
-                        direction = dir;
-                        break;
-                    }
-                }
-            }
+        //            if (matrix[nextCellRow, nextCellColumn] == cellNumber.ToString())
+        //            {
+        //                direction = dir;
+        //                break;
+        //            }
+        //        }
+        //    }
             
-            return direction;
-        }
+        //    return direction;
+        //}
         
-        private static bool IsCellValid(int cellNumber)
-        {
-            int matrixSize = MatrixSizeRows * MatrixSizeColumns;
-            if (cellNumber <= 0 || cellNumber >= matrixSize)
-            {
-                ConsoleManager.PrintCellDoesNotExistMessage();
-            }
-            return true;
-        }
+        //private static bool IsCellValid(int cellNumber)
+        //{
+        //    int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        //    if (cellNumber <= 0 || cellNumber >= matrixSize)
+        //    {
+        //        ConsoleManager.PrintCellDoesNotExistMessage();
+        //    }
+        //    return true;
+        //}
         
         private static string ReadUserInput()
         {
@@ -120,18 +117,19 @@ namespace Game_Fifteen
         }
         
         
-        public static void GameStart()
+        public static void GameStart(GameField field)
         {
             while (true)
             {
-                InitializeMatrix();
-                ShuffleMatrix();
-                turn = 0;
+                //InitializeMatrix();
+                //ShuffleMatrix();
+                //GameField field = new GameField();
+                //turn = 0;
                 ConsoleManager.PrintWelcomeMessage();
-                ConsoleManager.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+                ConsoleManager.PrintMatrix(field.GetMatrix, field.FieldRows, field.FieldColumns);
                 while (true)
                 {
-                    ConsoleManager.PrintNextMoveMessage();
+                    //ConsoleManager.PrintNextMoveMessage();
                     string userInput = ReadUserInput();
                     int cellNumber = 0;
                     bool needsRestart = false;
@@ -159,7 +157,7 @@ namespace Game_Fifteen
                     switch (userAction)
                     {
                         case Command.MoveCel:
-                            MoveCellByPlayer(cellNumber);
+                            field.MoveCellByPlayer(cellNumber);
                             break;
                         case Command.Top:
                             ConsoleManager.PrintTopScores();
@@ -182,25 +180,25 @@ namespace Game_Fifteen
             }
         }
   
-        private static void MoveCellByPlayer(int cellNumber)
-        {
-            if (IsCellValid(cellNumber) == false)
-            {
-                ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
-            }
-            if (TryMakeMove(cellNumber))
-            {
-                ConsoleManager.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
-            }
-            else
-            {
-                ConsoleManager.PrintMessage("Illegal move!");
-            }
-            if (CheckIfLevelFinished())
-            {
-                PerformEndingOperations();               
-            }
-        }
+        //private static void MoveCellByPlayer(int cellNumber) // veche ne se izpolzwa sled lekite promeni
+        //{
+        //    if (IsCellValid(cellNumber) == false)
+        //    {
+        //        ConsoleManager.PrintMessage("That cell does not exist in the matrix.");
+        //    }
+        //    if (TryMakeMove(cellNumber))
+        //    {
+        //        ConsoleManager.PrintMatrix(matrix, MatrixSizeRows, MatrixSizeColumns);
+        //    }
+        //    else
+        //    {
+        //        ConsoleManager.PrintMessage("Illegal move!");
+        //    }
+        //    if (CheckIfLevelFinished())
+        //    {
+        //        PerformEndingOperations();               
+        //    }
+        //}
         
         public static void PerformEndingOperations()
         {
@@ -221,76 +219,76 @@ namespace Game_Fifteen
             score.UpgradeTopScore(turn);
         }
         
-        private static void ShuffleMatrix()
-        {
-            int matrixSize = MatrixSizeRows * MatrixSizeColumns;
-            int shuffles = random.Next(matrixSize, matrixSize * 100);
-            for (int i = 0; i < shuffles; i++)
-            {
-                int direction = random.Next(DirectionRow.Length);
-                if (CheckIfCellIsValid(direction))
-                {
-                    MoveCell(direction);
-                }
-            }
-            if (CheckIfLevelFinished())
-            {
-                ShuffleMatrix();
-            }
-        }
+        //private static void ShuffleMatrix()
+        //{
+        //    int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        //    int shuffles = random.Next(matrixSize, matrixSize * 100);
+        //    for (int i = 0; i < shuffles; i++)
+        //    {
+        //        int direction = random.Next(DirectionRow.Length);
+        //        if (CheckIfCellIsValid(direction))
+        //        {
+        //            MoveCell(direction);
+        //        }
+        //    }
+        //    if (CheckIfLevelFinished())
+        //    {
+        //        ShuffleMatrix();
+        //    }
+        //}
         
-        private static bool CheckIfCellIsValid(int direction)
-        {
-            int nextCellRow = emptyCellRow + DirectionRow[direction];
+        //private static bool CheckIfCellIsValid(int direction)
+        //{
+        //    int nextCellRow = emptyCellRow + DirectionRow[direction];
             
-            bool isRowValid = nextCellRow >= 0 && nextCellRow < MatrixSizeRows;
+        //    bool isRowValid = nextCellRow >= 0 && nextCellRow < MatrixSizeRows;
             
-            int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+        //    int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
             
-            bool isColumnValid = nextCellColumn >= 0 && nextCellColumn < MatrixSizeColumns;
+        //    bool isColumnValid = nextCellColumn >= 0 && nextCellColumn < MatrixSizeColumns;
             
-            bool isCellValid = isRowValid && isColumnValid;
+        //    bool isCellValid = isRowValid && isColumnValid;
             
-            return isCellValid;
-        }
+        //    return isCellValid;
+        //}
         
-        private static bool CheckIfLevelFinished()
-        {
-            bool isEmptyCellInPlace = emptyCellRow == MatrixSizeRows - 1 &&
-                                      emptyCellColumn == MatrixSizeColumns - 1;
-            if (!isEmptyCellInPlace)
-            {
-                return false;
-            }
+        //private static bool CheckIfLevelFinished() //veche ne se izpolzva
+        //{
+        //    bool isEmptyCellInPlace = emptyCellRow == MatrixSizeRows - 1 &&
+        //                              emptyCellColumn == MatrixSizeColumns - 1;
+        //    if (!isEmptyCellInPlace)
+        //    {
+        //        return false;
+        //    }
             
-            int cellValue = 1;
+        //    int cellValue = 1;
             
-            int matrixSize = MatrixSizeRows * MatrixSizeColumns;
+        //    int matrixSize = MatrixSizeRows * MatrixSizeColumns;
             
-            for (int row = 0; row < MatrixSizeRows; row++)
-            {
-                for (int column = 0; column < MatrixSizeColumns && cellValue < matrixSize; column++)
-                {
-                    if (matrix[row, column] != cellValue.ToString())
-                    {
-                        return false;
-                    }
+        //    for (int row = 0; row < MatrixSizeRows; row++)
+        //    {
+        //        for (int column = 0; column < MatrixSizeColumns && cellValue < matrixSize; column++)
+        //        {
+        //            if (matrix[row, column] != cellValue.ToString())
+        //            {
+        //                return false;
+        //            }
                     
-                    cellValue++;
-                }
-            }
-            return true;
-        }
+        //            cellValue++;
+        //        }
+        //    }
+        //    return true;
+        //}
         
-        private static void MoveCell(int direction)
-        {
-            int nextCellRow = emptyCellRow + DirectionRow[direction];
-            int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
-            matrix[emptyCellRow, emptyCellColumn] = matrix[nextCellRow, nextCellColumn];
-            matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
-            emptyCellRow = nextCellRow;
-            emptyCellColumn = nextCellColumn;
-            turn++;
-        }
+        //private static void MoveCell(int direction)
+        //{
+        //    int nextCellRow = emptyCellRow + DirectionRow[direction];
+        //    int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+        //    matrix[emptyCellRow, emptyCellColumn] = matrix[nextCellRow, nextCellColumn];
+        //    matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
+        //    emptyCellRow = nextCellRow;
+        //    emptyCellColumn = nextCellColumn;
+        //    turn++;
+        //}
     }
 }

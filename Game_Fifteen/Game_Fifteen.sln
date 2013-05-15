@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_Fifteen", "Game_Fifteen\Game_Fifteen.csproj", "{56DD7177-A2FD-4AC8-9077-BC22CBB8F750}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGame_Fifteen", "TestGame_Fifteen\TestGame_Fifteen.csproj", "{11DDEF13-390B-4604-9D19-0E977780570D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game-Fifteen", "Game_Fifteen\Game-Fifteen.csproj", "{56DD7177-A2FD-4AC8-9077-BC22CBB8F750}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		{56DD7177-A2FD-4AC8-9077-BC22CBB8F750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56DD7177-A2FD-4AC8-9077-BC22CBB8F750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56DD7177-A2FD-4AC8-9077-BC22CBB8F750}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11DDEF13-390B-4604-9D19-0E977780570D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11DDEF13-390B-4604-9D19-0E977780570D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11DDEF13-390B-4604-9D19-0E977780570D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11DDEF13-390B-4604-9D19-0E977780570D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
