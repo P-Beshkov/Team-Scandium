@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace Game_Fifteen
 {
-    class ConsoleManager
-    {
-        //private const string CellDoesNotExistMessage = "That cell does not exist in the matrix.";
-        //private const string GoodbyeMessage = "Good bye!";
-        //private const string IllegalCommandMessage = "Illegal command!";
-        //private const string llegalMoveMessage = "Illegal move!";
-        //private const string NextMoveMessage = "Enter a number to move:!";
+    public class ConsoleManager
+    {        
         // Methods
 
         public static void PrintCellDoesNotExistMessage()
