@@ -9,6 +9,9 @@ namespace Game_Fifteen
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// Updates top players score.
+    /// </summary>
     public class Score
     {
         private const int TopPlayersCount = 5;
@@ -16,12 +19,18 @@ namespace Game_Fifteen
         private IOrderedEnumerable<Player> sortedScores;
         private Player[] TopPlayers { get; set; }
 
-        public void UpgradeTopScore(int turn, string pattern)
+        /// <summary>
+        /// Reads score list from file and
+        /// updates top players
+        /// </summary>
+        /// <param name="move">Players moves.</param>
+        /// <param name="pattern">Pattern for player data.</param>
+        public void UpgradeTopScore(int move, string pattern)
         {
             string[] topScores = FileHandling.GetTopScoresFromFile(TopPlayersCount);
             string name = ConsoleManager.ReadPlayerName();
 
-            topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, turn);
+            topScores[TopPlayersCount] = string.Format("0. {0} --> {1} move", name, move);
             Array.Sort(topScores);
 
             this.UpdateTopPlayers(topScores, pattern);

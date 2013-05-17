@@ -16,7 +16,7 @@ namespace TestGame_Fifteen
         public void TestGameFieldMazeOrdered()
         {
             GameField field = new GameField();
-            var isOrdered = field.IsMazeOrdered();
+            var isOrdered = field.IsMatrixOrdered();
             Assert.IsFalse(isOrdered);
         }
 

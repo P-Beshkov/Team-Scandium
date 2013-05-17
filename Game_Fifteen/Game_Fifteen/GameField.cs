@@ -61,7 +61,11 @@ namespace Game_Fifteen
             ConsoleManager.PrintMessage(this.matrix, GameBoardSize);
         }
 
-        public bool IsMazeOrdered()
+        /// <summary>
+        /// Checks if matrix is ordered.
+        /// </summary>
+        /// <returns>True if successfully, else returns false</returns>
+        public bool IsMatrixOrdered()
         {
             bool isEmptyCellInPlace = emptyCellRow == GameBoardSize - 1 &&
                                       emptyCellColumn == GameBoardSize - 1;
@@ -122,12 +126,17 @@ namespace Game_Fifteen
                 }
             }
 
-            if (this.IsMazeOrdered())
+            if (this.IsMatrixOrdered())
             {
                 this.ShuffleMatrix();
             }
         }
 
+        /// <summary>
+        /// Tries to move given cell.
+        /// </summary>
+        /// <param name="cellNumber">Cell to move.</param>
+        /// <returns>True if successfully, else returns false. </returns>
         private bool TryMakeMove(int cellNumber)
         {
             int direction = this.GetDirectionFromInputCell(cellNumber);
@@ -140,6 +149,10 @@ namespace Game_Fifteen
             return true;
         }
 
+        /// <summary>
+        /// Makes move in the given direction.
+        /// </summary>
+        /// <param name="direction">Direction to move.</param>
         private void MoveCell(int direction)
         {
             int nextCellRow = emptyCellRow + DirectionRow[direction];
@@ -151,6 +164,10 @@ namespace Game_Fifteen
             this.Moves++;
         }
 
+        /// <summary>
+        /// Checks if cell is in the matrix.
+        /// </summary>
+        /// <returns>True if successfully, else returns false.</returns>
         private bool CheckIfCellIsValid(int direction)
         {
             int nextCellRow = emptyCellRow + DirectionRow[direction];
@@ -162,6 +179,11 @@ namespace Game_Fifteen
             return isCellValid;
         }
 
+        /// <summary>
+        /// Checks given cell for valid move direction.
+        /// </summary>
+        /// <param name="cellNumber">The cell to check.</param>
+        /// <returns>Valid move direction.</returns>
         private int GetDirectionFromInputCell(int cellNumber)
         {
             int direction = -1;
@@ -184,7 +206,11 @@ namespace Game_Fifteen
 
             return direction;
         }
-
+        /// <summary>
+        /// Checks if player's input cell is in the matrix bounds.
+        /// </summary>
+        /// <param name="cellNumber">Number of cell.</param>
+        /// <returns></returns>
         private bool IsCellValid(int cellNumber)
         {
             if (cellNumber <= 0 || cellNumber >= MatrixSize)

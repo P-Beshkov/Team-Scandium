@@ -17,6 +17,9 @@ namespace Game_Fifteen
         private const int TopScoresAmount = 5;
         private const int GameBoardSize = 4;
 
+        /// <summary>
+        /// Starts game and executes all commands.
+        /// </summary>
         public static void GameStart()
         {
             ConsoleManager.PrintWelcomeMessage();
@@ -32,7 +35,7 @@ namespace Game_Fifteen
                 if (int.TryParse(userInput, out cellNumber))
                 {
                     field.MoveCellByPlayer(cellNumber);
-                    if (field.IsMazeOrdered())
+                    if (field.IsMatrixOrdered())
                     {
                         GameEnd(field);
                         break;
@@ -57,6 +60,11 @@ namespace Game_Fifteen
             ConsoleManager.PrintGoodbye();
         }
 
+        /// <summary>
+        /// Performs ending operations.
+        /// Asks for player name and starts new game.
+        /// </summary>
+        /// <param name="field"></param>
         public static void GameEnd(GameField field)
         {
             string moves = field.Moves == 1 ? "1 move" : string.Format("{0} moves", field.Moves);

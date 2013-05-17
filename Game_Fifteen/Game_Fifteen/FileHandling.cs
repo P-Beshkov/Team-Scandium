@@ -9,6 +9,9 @@ namespace Game_Fifteen
     using System.IO;
     using System.Linq;
 
+    /// <summary>
+    /// Reads and writes score list.
+    /// </summary>
     public class FileHandling
     {
         private const string TopScoresFileName = "Top.txt";
