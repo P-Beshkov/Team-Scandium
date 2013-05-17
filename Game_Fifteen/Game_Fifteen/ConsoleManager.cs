@@ -25,6 +25,7 @@ namespace Game_Fifteen
         public static void PrintGoodbye()
         {
             Console.WriteLine("Good bye!");
+            Environment.Exit(0);
         }
 
         public static void PrintIllegalCommandMessage()
