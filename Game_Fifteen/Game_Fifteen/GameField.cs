@@ -58,7 +58,7 @@ namespace Game_Fifteen
                 ConsoleManager.PrintIllegalMoveMessage();
             }
 
-            ConsoleManager.PrintMatrix(this.matrix, GameBoardSize);
+            ConsoleManager.PrintMessage(this.matrix, GameBoardSize);
         }
 
         public bool IsMazeOrdered()

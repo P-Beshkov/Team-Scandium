@@ -12,7 +12,7 @@ namespace Game_Fifteen
     /// Printing messages in the console via methods.
     /// </summary>
     public class ConsoleManager
-    {        
+    {
         // Public methods
         public static void PrintCellDoesNotExistMessage()
         {
@@ -24,7 +24,7 @@ namespace Game_Fifteen
             Console.WriteLine("Good bye!");
             Environment.Exit(0);
         }
-        
+
         public static void PrintIllegalCommandMessage()
         {
             RedMessage("Illegal command!");
@@ -40,7 +40,7 @@ namespace Game_Fifteen
             Console.Write("Enter a number to move: ");
         }
 
-        public static void PrintMatrix(string[,] matrix, int matrixSize)
+        public static string PrintMatrix(string[,] matrix, int matrixSize)
         {
             StringBuilder horizontalBorder = new StringBuilder("  ");
             for (int i = 0; i < matrixSize; i++)
@@ -48,17 +48,25 @@ namespace Game_Fifteen
                 horizontalBorder.Append("---");
             }
             horizontalBorder.Append("- ");
-            Console.WriteLine(horizontalBorder);
+            horizontalBorder.AppendLine();
+            //Console.WriteLine(horizontalBorder);
             for (int row = 0; row < matrixSize; row++)
             {
-                Console.Write(" |");
+                horizontalBorder.Append(" |");
                 for (int column = 0; column < matrixSize; column++)
                 {
-                    Console.Write("{0,3}", matrix[row, column]);
+                    horizontalBorder.AppendFormat("{0,3}", matrix[row, column]);
                 }
-                Console.WriteLine(" |");
+                horizontalBorder.AppendLine(" |");
             }
-            Console.WriteLine(horizontalBorder);
+            horizontalBorder.Append("  ");
+            for (int i = 0; i < matrixSize; i++)
+            {
+                horizontalBorder.Append("---");
+            }
+            horizontalBorder.Append("- ");
+            horizontalBorder.AppendLine();
+            return horizontalBorder.ToString();
         }
 
         public static void PrintTopScores(int scoresAmount)
@@ -120,6 +128,11 @@ namespace Game_Fifteen
 
             Console.ResetColor();
             return "";
+        }
+
+        public static void PrintMessage(string[,] matrix, int matrixSize)
+        {
+            Console.WriteLine(PrintMatrix(matrix, matrixSize));
         }
     }
 }

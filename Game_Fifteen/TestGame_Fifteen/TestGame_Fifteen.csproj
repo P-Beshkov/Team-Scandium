@@ -50,9 +50,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TestPlayer.cs" />
+    <Compile Include="PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameFieldTests.cs" />
+    <Compile Include="ConsoleManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game_Fifteen\Game-Fifteen.csproj">

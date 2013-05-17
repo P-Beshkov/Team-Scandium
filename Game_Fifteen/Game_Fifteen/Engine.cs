@@ -21,7 +21,8 @@ namespace Game_Fifteen
         {
             ConsoleManager.PrintWelcomeMessage();
             GameField field = new GameField();
-            ConsoleManager.PrintMatrix(field.GetMatrix, GameBoardSize);
+            ConsoleManager.PrintMessage(field.GetMatrix, GameBoardSize);
+            
             string userInput = ReadUserInput();
 
             while (userInput != "exit")

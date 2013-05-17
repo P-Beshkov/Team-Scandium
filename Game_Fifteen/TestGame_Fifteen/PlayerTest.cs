@@ -6,7 +6,7 @@ namespace TestGame_Fifteen
 {
 
     [TestClass]
-    public class TestPlayer
+    public class PlayerTest
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -16,14 +16,14 @@ namespace TestGame_Fifteen
         }
 
         [TestMethod]
-        public void CheckPlayerName()
+        public void TestCheckPlayerName()
         {
             Player player = new Player("Pesho", 10);
             Assert.AreEqual(player.Name, "Pesho");
         }
 
         [TestMethod]
-        public void CreatePlayerCheckMoves()
+        public void TestCheckPlayerMoves()
         {
             Player player = new Player("Ivan", 8);
             Assert.AreEqual(player.Score, 8);
