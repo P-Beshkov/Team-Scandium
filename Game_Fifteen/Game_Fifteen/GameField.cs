@@ -46,6 +46,10 @@ namespace Game_Fifteen
         }
 
         // Public methods
+        /// <summary>
+        /// Checks if the given cell can be moved and updates the matrix after the move.
+        /// </summary>
+        /// <param name="cellNumber">Cell to move.</param>
         public void MoveCellByPlayer(int cellNumber)
         {
             if (this.IsCellValid(cellNumber) == false)
