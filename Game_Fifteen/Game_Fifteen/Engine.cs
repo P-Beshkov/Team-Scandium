@@ -8,18 +8,20 @@ namespace Game_Fifteen
     using System;
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// Contains main gameplay logic.
+    /// </summary>
     public class Engine
     {
         private const string TopScoresPersonPattern = @"^\d+\. (.+) --> (\d+) moves?$";
-
         private const int TopScoresAmount = 5;
+        private const int GameBoardSize = 4;
 
         public static void GameStart()
         {
             ConsoleManager.PrintWelcomeMessage();
-            //GameField field = GameField.GetGameFieldInstance();
             GameField field = new GameField();
-            ConsoleManager.PrintMatrix(field.GetMatrix, field.FieldRows);
+            ConsoleManager.PrintMatrix(field.GetMatrix, GameBoardSize);
             string userInput = ReadUserInput();
 
             while (userInput != "exit")

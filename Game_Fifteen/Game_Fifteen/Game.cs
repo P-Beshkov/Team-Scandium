@@ -7,7 +7,10 @@ namespace Game_Fifteen
 {
     using System;
 
-    class Game
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
+    public class Game
     {
         static void Main(string[] args)
         {
