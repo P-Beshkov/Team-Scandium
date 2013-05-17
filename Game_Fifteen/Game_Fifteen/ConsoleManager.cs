@@ -13,7 +13,7 @@ namespace Game_Fifteen
     /// </summary>
     public class ConsoleManager
     {        
-        // Methods
+        // Public methods
         public static void PrintCellDoesNotExistMessage()
         {
             Console.WriteLine("That cell does not exist in the matrix.");
@@ -27,12 +27,12 @@ namespace Game_Fifteen
         
         public static void PrintIllegalCommandMessage()
         {
-            Console.WriteLine("Illegal command!");
+            RedMessage("Illegal command!");
         }
 
         public static void PrintIllegalMoveMessage()
         {
-            Console.WriteLine("Illegal move!");
+            RedMessage("Illegal move!");
         }
 
         public static void PrintNextMoveMessage()
@@ -61,10 +61,10 @@ namespace Game_Fifteen
             Console.WriteLine(horizontalBorder);
         }
 
-        public static void PrintTopScores()
+        public static void PrintTopScores(int scoresAmount)
         {
             Console.WriteLine("Scoreboard:");
-            string[] topScores = FileHandling.GetTopScoresFromFile();
+            string[] topScores = FileHandling.GetTopScoresFromFile(scoresAmount);
             if (topScores[0] == null)
             {
                 Console.WriteLine("There are no scores to display yet.");
@@ -109,6 +109,17 @@ namespace Game_Fifteen
             }
 
             return name;
+        }
+
+        //make console red if wrong input
+        public static string RedMessage(string value)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(value);
+
+            Console.ResetColor();
+            return "";
         }
     }
 }

@@ -13,18 +13,16 @@ namespace Game_Fifteen
     {
         private const string TopScoresFileName = "Top.txt";
 
-        private const int TopScoresAmount = 5;
-
-        public static string[] GetTopScoresFromFile()
+        public static string[] GetTopScoresFromFile(int scoresAmount)
         {
             try
             {
-                string[] topScores = new string[TopScoresAmount + 1];
+                string[] topScores = new string[scoresAmount + 1];
                 StreamReader topReader = new StreamReader(TopScoresFileName);
                 using (topReader)
                 {
                     int line = 0;
-                    while (!topReader.EndOfStream && line < TopScoresAmount)
+                    while (!topReader.EndOfStream && line < scoresAmount)
                     {
                         topScores[line] = topReader.ReadLine();
                         line++;
@@ -39,7 +37,7 @@ namespace Game_Fifteen
                 {
                     topWriter.Write("");
                 }
-                return new string[TopScoresAmount];
+                return new string[scoresAmount];
             }
         }
 

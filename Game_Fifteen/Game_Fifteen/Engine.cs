@@ -13,7 +13,7 @@ namespace Game_Fifteen
     /// </summary>
     public class Engine
     {
-        private const string TopScoresPersonPattern = @"^\d+\. (.+) --> (\d+) moves?$";
+        private const string ScorePattern = @"^\d+\. (.+) --> (\d+) moves?$";
         private const int TopScoresAmount = 5;
         private const int GameBoardSize = 4;
 
@@ -39,7 +39,7 @@ namespace Game_Fifteen
                 }
                 else if (userInput == "top")
                 {
-                    ConsoleManager.PrintTopScores();
+                    ConsoleManager.PrintTopScores(TopScoresAmount);
                 }
                 else if (userInput == "restart")
                 {
@@ -59,10 +59,10 @@ namespace Game_Fifteen
         {
             string moves = field.Turns == 1 ? "1 move" : string.Format("{0} moves", field.Turns);
             ConsoleManager.PrintCongratulation(moves);
-            string[] topScores = FileHandling.GetTopScoresFromFile();
+            string[] topScores = FileHandling.GetTopScoresFromFile(TopScoresAmount);
             if (topScores[TopScoresAmount - 1] != null)
             {
-                string lowestScore = Regex.Replace(topScores[TopScoresAmount - 1], TopScoresPersonPattern, @"$2");
+                string lowestScore = Regex.Replace(topScores[TopScoresAmount - 1], ScorePattern, @"$2");
                 if (int.Parse(lowestScore) < field.Turns)
                 {
                     ConsoleManager.PrintScore(TopScoresAmount);
@@ -71,7 +71,7 @@ namespace Game_Fifteen
             }
 
             Score score = new Score();
-            score.UpgradeTopScore(field.Turns);
+            score.UpgradeTopScore(field.Turns, ScorePattern);
             GameStart();
         }
 
