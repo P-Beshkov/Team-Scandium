@@ -89,7 +89,7 @@ namespace Game_Fifteen
         }
 
         // Private methods
-        private void InitializeMatrix()
+        public void InitializeMatrix()
         {
             this.matrix = new string[GameBoardSize, GameBoardSize];
 

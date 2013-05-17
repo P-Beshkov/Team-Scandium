@@ -6,6 +6,7 @@
 namespace TestGame_Fifteen
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Game_Fifteen;
 
@@ -49,6 +50,29 @@ namespace TestGame_Fifteen
             var expected = 0;
 
             Assert.AreEqual(actual, expected);
+        }
+
+        [TestMethod]
+        public void TestGenerateOrderedMatrix()
+        {
+            var size = 4;
+            string[,] expectedMatrix = new string[size, size];
+            var counter = 1;
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    expectedMatrix[i, j] = counter.ToString();
+                    counter++;
+                }
+            }
+            expectedMatrix[3, 3] = string.Empty;
+
+            GameField field = new GameField();
+            field.InitializeMatrix();
+            var actualMatrix = field.GetMatrix;
+
+            Assert.AreEqual(string.Join(",", expectedMatrix), string.Join(",", actualMatrix));
         }
     }
 }
