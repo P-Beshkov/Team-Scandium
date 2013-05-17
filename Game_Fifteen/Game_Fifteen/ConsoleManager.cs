@@ -122,7 +122,7 @@ namespace Game_Fifteen
             return name;
         }
 
-        // make console red if wrong input
+        // make console red 
         public static string RedMessage(string value)
         {
             Console.BackgroundColor = ConsoleColor.Red;
