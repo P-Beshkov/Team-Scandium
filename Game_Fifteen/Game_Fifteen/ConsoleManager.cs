@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="ConsoleManager.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
 namespace Game_Fifteen
 {
+    using System;
+    using System.Text;
+
     class ConsoleManager
     {
         //private const string CellDoesNotExistMessage = "That cell does not exist in the matrix.";
@@ -35,25 +36,25 @@ namespace Game_Fifteen
         {
             Console.WriteLine("Illegal move!");
         }
- 
+
         public static void PrintNextMoveMessage()
         {
             Console.Write("Enter a number to move: ");
         }
 
-        public static void PrintMatrix(string[,] matrix, int matrixSizeRows, int matrixSizeColumns)
+        public static void PrintMatrix(string[,] matrix, int matrixSize)
         {
             StringBuilder horizontalBorder = new StringBuilder("  ");
-            for (int i = 0; i < matrixSizeColumns; i++)
+            for (int i = 0; i < matrixSize; i++)
             {
                 horizontalBorder.Append("---");
             }
             horizontalBorder.Append("- ");
             Console.WriteLine(horizontalBorder);
-            for (int row = 0; row < matrixSizeRows; row++)
+            for (int row = 0; row < matrixSize; row++)
             {
                 Console.Write(" |");
-                for (int column = 0; column < matrixSizeColumns; column++)
+                for (int column = 0; column < matrixSize; column++)
                 {
                     Console.Write("{0,3}", matrix[row, column]);
                 }
@@ -87,7 +88,7 @@ namespace Game_Fifteen
             Console.Write("Welcome to the game \"15\". ");
             Console.WriteLine("Please try to arrange the numbers sequentially. ");
             Console.WriteLine("Use 'top' to view the top scoreboard, " +
-                              "'restart' to start a new game and 'exit'  to quit the game.");
+                              "'restart' to start a new game and 'exit' to quit the game.");
         }
 
         public static void PrintCongratulation(string moves)

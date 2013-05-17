@@ -1,4 +1,9 @@
-﻿namespace Game_Fifteen
+﻿//-----------------------------------------------------------------------
+// <copyright file="Score.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
+namespace Game_Fifteen
 {
     using System;
     using System.Linq;
@@ -10,11 +15,6 @@
         private const string ScorePattern = @"^\d+\. (.+) --> (\d+) moves?$";
 
         private IOrderedEnumerable<Player> sortedScores;
-
-        public Score()
-        {
-        }
-
         private Player[] TopPlayers { get; set; }
 
         public void UpgradeTopScore(int turn)

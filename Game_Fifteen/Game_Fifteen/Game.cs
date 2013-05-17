@@ -1,17 +1,17 @@
-﻿using System;
-using System.Linq;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Game.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
 namespace Game_Fifteen
 {
+    using System;
+
     class Game
     {
         static void Main(string[] args)
         {
-            GameField field = new GameField();
-            Engine.GameStart(field);
-
-            
-
+            Engine.GameStart();
         }
     }
 }

@@ -1,9 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="FileHandling.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
 namespace Game_Fifteen
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+
     class FileHandling
     {
         private const string TopScoresFileName = "Top.txt";
@@ -44,10 +49,10 @@ namespace Game_Fifteen
             using (topWriter)
             {
                 int position = 1;
-                foreach (Player pair in sortedScores)
+                foreach (Player player in sortedScores)
                 {
-                    string name = pair.Name;
-                    int score = pair.Score;
+                    string name = player.Name;
+                    int score = player.Score;
                     string toWrite = string.Format(
                         "{0}. {1} --> {2} move", position, name, score);
                     if (score > 1)

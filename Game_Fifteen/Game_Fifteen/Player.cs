@@ -1,51 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Player.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
 namespace Game_Fifteen
 {
+    using System;
+
     /// <summary>
     /// name and score of each player
     /// </summary>
     public class Player
     {
-        private string name;
-        private int score;
-
         public Player(string name, int score)
         {
             if (score < 0)
             {
                 throw new ArgumentException("Playes score can not be negative!");
             }
-            this.name = name;
-            this.score = score;        
+            this.Name = name;
+            this.Score = score;
         }
 
-        public string Name        
-        {        
-            get            
-            {            
-                return this.name;
-            }            
-            private set            
-            {
-                this.name = value;
-            }
-        }
-        
-        public int Score        
-        {
-            get
-            {
-                return this.score;
-            }
-            set
-            {
-                this.score = value;
-            }
-        }
+        public string Name { get; private set; }
+
+        public int Score { get; private set; }
     }
 }
