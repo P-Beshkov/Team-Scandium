@@ -21,10 +21,12 @@ namespace Game_Fifteen
             GameField field = new GameField();
             ConsoleManager.PrintMatrix(field.GetMatrix, field.FieldRows);
             string userInput = ReadUserInput();
+            int restartCounts = 0;
 
             while (userInput != "exit")
             {
                 int cellNumber;
+                
                 if (int.TryParse(userInput, out cellNumber))
                 {
                     field.MoveCellByPlayer(cellNumber);
@@ -39,7 +41,10 @@ namespace Game_Fifteen
                 }
                 else if (userInput == "restart")
                 {
-                    GameStart();
+                    //GameStart();
+                    RestartGame();
+                    restartCounts++;
+                    break;
                 }
                 else
                 {
@@ -47,9 +52,22 @@ namespace Game_Fifteen
                 }
 
                 userInput = ReadUserInput();
-            }
 
-            ConsoleManager.PrintGoodbye();
+                if (restartCounts > 0)
+                {
+                    ConsoleManager.PrintGoodbye();
+                    break;
+                }
+            }
+            if (restartCounts == 0)
+            {
+                ConsoleManager.PrintGoodbye();
+            }
+        }
+
+        private static void RestartGame()
+        {
+            GameStart();
         }
 
         public static void GameEnd(GameField field)
