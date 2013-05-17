@@ -16,8 +16,8 @@ namespace Game_Fifteen
         private const int GameBoardSize = 4;
         private const int MatrixSize = GameBoardSize * GameBoardSize;
 
-        private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
-        private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
+        private static readonly int[] directionRow = { -1, 0, 1, 0 };
+        private static readonly int[] directionColumn = { 0, 1, 0, -1 };
         private static readonly Random random = new Random();
 
         private static int emptyCellRow;
@@ -115,7 +115,7 @@ namespace Game_Fifteen
             int shuffles = random.Next(MatrixSize, MatrixSize * 100);
             for (int i = 0; i < 2; i++)
             {
-                int direction = random.Next(DirectionRow.Length);
+                int direction = random.Next(directionRow.Length);
                 if (this.CheckIfCellIsValid(direction))
                 {
                     this.MoveCell(direction);
@@ -142,8 +142,8 @@ namespace Game_Fifteen
 
         private void MoveCell(int direction)
         {
-            int nextCellRow = emptyCellRow + DirectionRow[direction];
-            int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+            int nextCellRow = emptyCellRow + directionRow[direction];
+            int nextCellColumn = emptyCellColumn + directionColumn[direction];
             this.matrix[emptyCellRow, emptyCellColumn] = this.matrix[nextCellRow, nextCellColumn];
             this.matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
             emptyCellRow = nextCellRow;
@@ -153,9 +153,9 @@ namespace Game_Fifteen
 
         private bool CheckIfCellIsValid(int direction)
         {
-            int nextCellRow = emptyCellRow + DirectionRow[direction];
+            int nextCellRow = emptyCellRow + directionRow[direction];
             bool isRowValid = nextCellRow >= 0 && nextCellRow < GameBoardSize;
-            int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
+            int nextCellColumn = emptyCellColumn + directionColumn[direction];
             bool isColumnValid = nextCellColumn >= 0 && (nextCellColumn < GameBoardSize);
             bool isCellValid = isRowValid && isColumnValid;
 
@@ -166,13 +166,13 @@ namespace Game_Fifteen
         {
             int direction = -1;
 
-            for (int dir = 0; dir < DirectionRow.Length; dir++)
+            for (int dir = 0; dir < directionRow.Length; dir++)
             {
                 bool isDirValid = this.CheckIfCellIsValid(dir);
                 if (isDirValid)
                 {
-                    int nextCellRow = emptyCellRow + DirectionRow[dir];
-                    int nextCellColumn = emptyCellColumn + DirectionColumn[dir];
+                    int nextCellRow = emptyCellRow + directionRow[dir];
+                    int nextCellColumn = emptyCellColumn + directionColumn[dir];
 
                     if (this.matrix[nextCellRow, nextCellColumn] == cellNumber.ToString())
                     {
