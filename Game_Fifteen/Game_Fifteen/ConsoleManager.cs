@@ -2,21 +2,18 @@
 // <copyright file="ConsoleManager.cs" company="TelerikAcademy">
 //     All rights reserved © Telerik Academy 2012-2013
 // </copyright>
-//----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 namespace Game_Fifteen
 {
     using System;
     using System.Text;
 
-    class ConsoleManager
-    {
-        //private const string CellDoesNotExistMessage = "That cell does not exist in the matrix.";
-        //private const string GoodbyeMessage = "Good bye!";
-        //private const string IllegalCommandMessage = "Illegal command!";
-        //private const string llegalMoveMessage = "Illegal move!";
-        //private const string NextMoveMessage = "Enter a number to move:!";
+    /// <summary>
+    /// Printing messages in the console via methods.
+    /// </summary>
+    public class ConsoleManager
+    {        
         // Methods
-
         public static void PrintCellDoesNotExistMessage()
         {
             Console.WriteLine("That cell does not exist in the matrix.");
@@ -27,7 +24,7 @@ namespace Game_Fifteen
             Console.WriteLine("Good bye!");
             Environment.Exit(0);
         }
-
+        
         public static void PrintIllegalCommandMessage()
         {
             Console.WriteLine("Illegal command!");
@@ -100,11 +97,6 @@ namespace Game_Fifteen
         public static void PrintScore(int topScoresAmount)
         {
             Console.WriteLine("You couldn't get in the top {0} scoreboard.", topScoresAmount);
-        }
-
-        public static void PrintMessage(string message)
-        {
-            Console.WriteLine(message);
         }
 
         public static string ReadPlayerName()

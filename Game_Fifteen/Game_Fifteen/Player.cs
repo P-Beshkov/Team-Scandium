@@ -8,7 +8,7 @@ namespace Game_Fifteen
     using System;
 
     /// <summary>
-    /// name and score of each player
+    /// Name and score of each player
     /// </summary>
     public class Player
     {

@@ -9,7 +9,7 @@ namespace Game_Fifteen
     using System.IO;
     using System.Linq;
 
-    class FileHandling
+    public class FileHandling
     {
         private const string TopScoresFileName = "Top.txt";
 
