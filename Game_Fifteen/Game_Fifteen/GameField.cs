@@ -6,15 +6,15 @@
 namespace Game_Fifteen
 {
     using System;
-    using System.Text;
 
+    /// <summary>
+    /// Generates game field.
+    /// </summary>
     public class GameField
     {
         private const string EmptyCellValue = " ";
-
-        // private const int MatrixSizeRows = 4;
-        // private const int MatrixSizeColumns = 4;  
-        private const int GAME_BOARD_SIZE = 4;
+        private const int GameBoardSize = 4;
+        private const int MatrixSize = GameBoardSize * GameBoardSize;
 
         private static readonly int[] DirectionRow = { -1, 0, 1, 0 };
         private static readonly int[] DirectionColumn = { 0, 1, 0, -1 };
@@ -26,30 +26,11 @@ namespace Game_Fifteen
         private int moves;
         private string[,] matrix;
 
-        // Singleton Design Pattern
-        //private static readonly GameField instance = new GameField();
-
-        //public static GameField GetGameFieldInstance()
-        //{
-        //    return instance;
-        //}
-
         public GameField()
         {
             this.InitializeMatrix();
             this.ShuffleMatrix();
             this.Turns = 0;
-        }
-
-        // for deletion
-        public int FieldRows
-        {
-            get { return this.matrix.GetLength(0); }
-        }
-
-        public int FieldColumns
-        {
-            get { return this.matrix.GetLength(1); }
         }
 
         public string[,] GetMatrix
@@ -64,6 +45,7 @@ namespace Game_Fifteen
             set { this.moves = value; }
         }
 
+        // Public methods
         public void MoveCellByPlayer(int cellNumber)
         {
             if (this.IsCellValid(cellNumber) == false)
@@ -73,43 +55,16 @@ namespace Game_Fifteen
 
             if (this.TryMakeMove(cellNumber) == false)
             {
-                ConsoleManager.PrintIllegalCommandMessage();
+                ConsoleManager.PrintIllegalMoveMessage();
             }
 
-            ConsoleManager.PrintMatrix(this.matrix, GAME_BOARD_SIZE);
-        }
-
-        public override string ToString()
-        {
-            StringBuilder horizontalBorder = new StringBuilder("  ");
-            for (int i = 0; i < this.matrix.GetLength(1); i++)
-            {
-                horizontalBorder.Append("---");
-            }
-
-            horizontalBorder.Append("- \n");
-
-            StringBuilder buffer = new StringBuilder();
-            buffer.Append(horizontalBorder);
-            for (int row = 0; row < this.matrix.GetLength(0); row++)
-            {
-                buffer.Append(" |");
-                for (int column = 0; column < this.matrix.GetLength(1); column++)
-                {
-                    buffer.Append(string.Format("{0,3}", this.matrix[row, column]));
-                }
-
-                buffer.Append(" |\n");
-            }
-
-            buffer.Append(horizontalBorder);
-            return buffer.ToString();
+            ConsoleManager.PrintMatrix(this.matrix, GameBoardSize);
         }
 
         public bool IsMazeOrdered()
         {
-            bool isEmptyCellInPlace = emptyCellRow == this.FieldRows - 1 &&
-                                      emptyCellColumn == this.FieldColumns - 1;
+            bool isEmptyCellInPlace = emptyCellRow == GameBoardSize - 1 &&
+                                      emptyCellColumn == GameBoardSize - 1;
             if (!isEmptyCellInPlace)
             {
                 return false;
@@ -117,11 +72,9 @@ namespace Game_Fifteen
 
             int cellValue = 1;
 
-            int matrixSize = this.FieldRows * this.FieldColumns;
-
-            for (int row = 0; row < this.FieldRows; row++)
+            for (int row = 0; row < GameBoardSize; row++)
             {
-                for (int column = 0; column < this.FieldColumns && cellValue < matrixSize; column++)
+                for (int column = 0; column < GameBoardSize && cellValue < MatrixSize; column++)
                 {
                     if (this.matrix[row, column] != cellValue.ToString())
                     {
@@ -135,31 +88,31 @@ namespace Game_Fifteen
             return true;
         }
 
+        // Private methods
         private void InitializeMatrix()
         {
-            this.matrix = new string[GAME_BOARD_SIZE, GAME_BOARD_SIZE];
+            this.matrix = new string[GameBoardSize, GameBoardSize];
 
             int cellValue = 1;
 
-            for (int row = 0; row < this.FieldRows; row++)
+            for (int row = 0; row < GameBoardSize; row++)
             {
-                for (int column = 0; column < this.FieldColumns; column++)
+                for (int column = 0; column < GameBoardSize; column++)
                 {
                     this.matrix[row, column] = cellValue.ToString();
                     cellValue++;
                 }
             }
 
-            emptyCellRow = this.FieldRows - 1;
-            emptyCellColumn = this.FieldColumns - 1;
+            emptyCellRow = GameBoardSize - 1;
+            emptyCellColumn = GameBoardSize - 1;
             this.matrix[emptyCellRow, emptyCellColumn] = EmptyCellValue;
         }
 
         // TODO change shuffle 
-        private void ShuffleMatrix() // testing
+        private void ShuffleMatrix()
         {
-            int matrixSize = this.FieldRows * this.FieldColumns;
-            int shuffles = random.Next(matrixSize, matrixSize * 100);
+            int shuffles = random.Next(MatrixSize, MatrixSize * 100);
             for (int i = 0; i < 2; i++)
             {
                 int direction = random.Next(DirectionRow.Length);
@@ -201,9 +154,9 @@ namespace Game_Fifteen
         private bool CheckIfCellIsValid(int direction)
         {
             int nextCellRow = emptyCellRow + DirectionRow[direction];
-            bool isRowValid = nextCellRow >= 0 && nextCellRow < this.FieldRows;
+            bool isRowValid = nextCellRow >= 0 && nextCellRow < GameBoardSize;
             int nextCellColumn = emptyCellColumn + DirectionColumn[direction];
-            bool isColumnValid = nextCellColumn >= 0 && (nextCellColumn < this.FieldColumns);
+            bool isColumnValid = nextCellColumn >= 0 && (nextCellColumn < GameBoardSize);
             bool isCellValid = isRowValid && isColumnValid;
 
             return isCellValid;
@@ -234,8 +187,7 @@ namespace Game_Fifteen
 
         private bool IsCellValid(int cellNumber)
         {
-            int matrixSize = this.FieldRows * this.FieldColumns;
-            if (cellNumber <= 0 || cellNumber >= matrixSize)
+            if (cellNumber <= 0 || cellNumber >= MatrixSize)
             {
                 return false;
             }
