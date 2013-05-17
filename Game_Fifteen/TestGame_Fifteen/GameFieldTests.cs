@@ -13,10 +13,42 @@ namespace TestGame_Fifteen
     public class GameFieldTests
     {
         [TestMethod]
-        public void TestGameField1()
+        public void TestGameFieldMazeOrdered()
         {
             GameField field = new GameField();
-            field.
+            var isOrdered = field.IsMazeOrdered();
+            Assert.IsFalse(isOrdered);
+        }
+
+        [TestMethod]
+        public void TestGameFieldMatrixWidth()
+        {
+            GameField field = new GameField();
+            string[,] actual = field.GetMatrix;
+            var width = actual.GetLength(0);
+
+            Assert.AreEqual(width, 4);
+        }
+
+        [TestMethod]
+        public void TestGameFieldMatrixHeight()
+        {
+            GameField field = new GameField();
+            string[,] actual = field.GetMatrix;
+            var height = actual.GetLength(1);
+
+            Assert.AreEqual(height, 4);
+        }
+
+        [TestMethod]
+        public void TestGameFieldMoves()
+        {
+            GameField field = new GameField();
+
+            var actual = field.Moves;
+            var expected = 0;
+
+            Assert.AreEqual(actual, expected);
         }
     }
 }

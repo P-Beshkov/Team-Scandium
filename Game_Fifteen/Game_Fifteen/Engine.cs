@@ -57,13 +57,13 @@ namespace Game_Fifteen
 
         public static void GameEnd(GameField field)
         {
-            string moves = field.Turns == 1 ? "1 move" : string.Format("{0} moves", field.Turns);
+            string moves = field.Moves == 1 ? "1 move" : string.Format("{0} moves", field.Moves);
             ConsoleManager.PrintCongratulation(moves);
             string[] topScores = FileHandling.GetTopScoresFromFile(TopScoresAmount);
             if (topScores[TopScoresAmount - 1] != null)
             {
                 string lowestScore = Regex.Replace(topScores[TopScoresAmount - 1], ScorePattern, @"$2");
-                if (int.Parse(lowestScore) < field.Turns)
+                if (int.Parse(lowestScore) < field.Moves)
                 {
                     ConsoleManager.PrintScore(TopScoresAmount);
                     GameStart();
@@ -71,7 +71,7 @@ namespace Game_Fifteen
             }
 
             Score score = new Score();
-            score.UpgradeTopScore(field.Turns, ScorePattern);
+            score.UpgradeTopScore(field.Moves, ScorePattern);
             GameStart();
         }
 

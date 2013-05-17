@@ -30,7 +30,7 @@ namespace Game_Fifteen
         {
             this.InitializeMatrix();
             this.ShuffleMatrix();
-            this.Turns = 0;
+            this.Moves = 0;
         }
 
         public string[,] GetMatrix
@@ -38,7 +38,7 @@ namespace Game_Fifteen
             get { return this.matrix; }
         }
 
-        public int Turns
+        public int Moves
         {
             get { return this.moves; }
 
@@ -148,7 +148,7 @@ namespace Game_Fifteen
             this.matrix[nextCellRow, nextCellColumn] = EmptyCellValue;
             emptyCellRow = nextCellRow;
             emptyCellColumn = nextCellColumn;
-            this.Turns++;
+            this.Moves++;
         }
 
         private bool CheckIfCellIsValid(int direction)
