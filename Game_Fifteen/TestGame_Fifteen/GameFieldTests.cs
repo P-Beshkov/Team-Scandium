@@ -1,14 +1,13 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TestGameField.cs" company="TelerikAcademy">
+// <copyright file="GameFieldTests.cs" company="TelerikAcademy">
 //     All rights reserved © Telerik Academy 2012-2013
 // </copyright>
 //----------------------------------------------------------------------
 namespace TestGame_Fifteen
 {
     using System;
-    using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Game_Fifteen;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;    
 
     [TestClass]
     public class GameFieldTests
@@ -66,6 +65,7 @@ namespace TestGame_Fifteen
                     counter++;
                 }
             }
+
             expectedMatrix[3, 3] = string.Empty;
 
             GameField field = new GameField();

@@ -12,7 +12,7 @@ namespace Game_Fifteen
     /// </summary>
     public class Game
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Engine.GameStart();
         }

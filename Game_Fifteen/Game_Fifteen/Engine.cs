@@ -53,6 +53,7 @@ namespace Game_Fifteen
 
                 userInput = ReadUserInput();
             }
+
             ConsoleManager.PrintGoodbye();
         }
 

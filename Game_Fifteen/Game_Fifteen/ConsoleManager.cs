@@ -47,9 +47,9 @@ namespace Game_Fifteen
             {
                 horizontalBorder.Append("---");
             }
+
             horizontalBorder.Append("- ");
-            horizontalBorder.AppendLine();
-            //Console.WriteLine(horizontalBorder);
+            horizontalBorder.AppendLine();            
             for (int row = 0; row < matrixSize; row++)
             {
                 horizontalBorder.Append(" |");
@@ -57,13 +57,16 @@ namespace Game_Fifteen
                 {
                     horizontalBorder.AppendFormat("{0,3}", matrix[row, column]);
                 }
+
                 horizontalBorder.AppendLine(" |");
             }
+
             horizontalBorder.Append("  ");
             for (int i = 0; i < matrixSize; i++)
             {
                 horizontalBorder.Append("---");
             }
+
             horizontalBorder.Append("- ");
             horizontalBorder.AppendLine();
             return horizontalBorder.ToString();
@@ -119,7 +122,7 @@ namespace Game_Fifteen
             return name;
         }
 
-        //make console red if wrong input
+        // make console red if wrong input
         public static string RedMessage(string value)
         {
             Console.BackgroundColor = ConsoleColor.Red;
@@ -127,7 +130,7 @@ namespace Game_Fifteen
             Console.WriteLine(value);
 
             Console.ResetColor();
-            return "";
+            return string.Empty;
         }
 
         public static void PrintMessage(string[,] matrix, int matrixSize)

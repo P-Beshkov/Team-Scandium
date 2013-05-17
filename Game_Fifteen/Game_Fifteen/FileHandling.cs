@@ -28,6 +28,7 @@ namespace Game_Fifteen
                         line++;
                     }
                 }
+
                 return topScores;
             }
             catch (FileNotFoundException)
@@ -35,8 +36,9 @@ namespace Game_Fifteen
                 StreamWriter topWriter = new StreamWriter(TopScoresFileName);
                 using (topWriter)
                 {
-                    topWriter.Write("");
+                    topWriter.Write(string.Empty);
                 }
+
                 return new string[scoresAmount];
             }
         }
@@ -57,6 +59,7 @@ namespace Game_Fifteen
                     {
                         toWrite += "s";
                     }
+
                     topWriter.WriteLine(toWrite);
                     position++;
                 }

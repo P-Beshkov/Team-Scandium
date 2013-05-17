@@ -18,6 +18,7 @@ namespace Game_Fifteen
             {
                 throw new ArgumentException("Playes score can not be negative!");
             }
+
             this.Name = name;
             this.Score = score;
         }

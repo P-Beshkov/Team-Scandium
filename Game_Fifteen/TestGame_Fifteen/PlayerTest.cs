@@ -1,9 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Game_Fifteen;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlayerTest.cs" company="TelerikAcademy">
+//     All rights reserved © Telerik Academy 2012-2013
+// </copyright>
+//----------------------------------------------------------------------
 namespace TestGame_Fifteen
 {
+    using System;
+    using Game_Fifteen;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class PlayerTest
