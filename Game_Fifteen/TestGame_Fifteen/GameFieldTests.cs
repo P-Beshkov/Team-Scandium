@@ -10,7 +10,7 @@ namespace TestGame_Fifteen
     using Game_Fifteen;
 
     [TestClass]
-    public class TestGameField
+    public class GameFieldTests
     {
         [TestMethod]
         public void TestGameField1()
